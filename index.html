@@ -1,71 +1,220 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CompTIA Project+ Study Guide</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --text-primary: #1A1830;
+  --text-secondary: #6B6891;
+  --bg-page: #F4F3FC;
+  --bg-surface: #FFFFFF;
+  --bg-secondary: #EEEDFE;
+  --border: #DDD9F5;
+  --accent: #3C3489;
+  --accent-bg: #EEEDFE;
+  --accent-text: #3C3489;
+  --progress-fill: #534AB7;
+  --card-shadow: 0 1px 3px rgba(60, 52, 137, 0.08), 0 0 0 1px var(--border);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-.sg-wrap { padding: 1rem 0; }
+[data-theme="dark"] {
+  --text-primary: #E8E6FF;
+  --text-secondary: #9490BF;
+  --bg-page: #0F0E1A;
+  --bg-surface: #1C1A30;
+  --bg-secondary: #252240;
+  --border: #2E2B4A;
+  --accent: #7B75E8;
+  --accent-bg: #252240;
+  --accent-text: #A89FF5;
+  --progress-fill: #6C66D8;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 16px;
+  max-width: 740px;
+  margin: 0 auto;
+  transition: var(--transition);
+}
+
+.sg-wrap { padding: 0.5rem 0 2.5rem; }
 .sg-header { margin-bottom: 1.5rem; }
-.sg-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
-.sg-sub { font-size: 14px; color: var(--color-text-secondary); margin-top: 4px; }
+.sg-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.sg-title { font-size: 22px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.3px; }
+.sg-sub { font-size: 13px; color: var(--text-secondary); margin-top: 5px; line-height: 1.5; }
+
+.theme-toggle {
+  flex-shrink: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+.theme-toggle:hover { background: var(--bg-secondary); }
 
 .domain-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
-.tab-btn { padding: 8px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; touch-action: manipulation; }
-.tab-btn:hover { background: var(--color-background-secondary); }
-.tab-btn.active { background: #3C3489; color: #EEEDFE; border-color: #3C3489; font-weight: 500; }
+.tab-btn {
+  padding: 8px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+.tab-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
+.tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; box-shadow: 0 2px 10px rgba(83, 74, 183, 0.35); }
 
-.obj-grid { display: grid; gap: 12px; }
-.obj-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
-.obj-header { padding: 14px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; user-select: none; touch-action: manipulation; }
-.obj-header:hover { background: var(--color-background-secondary); }
-.obj-id { font-size: 11px; font-weight: 500; background: #EEEDFE; color: #3C3489; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
-.obj-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
-.obj-chevron { font-size: 16px; color: var(--color-text-secondary); transition: transform 0.2s; }
+.obj-grid { display: grid; gap: 10px; }
+.obj-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+.obj-header {
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+.obj-header:hover { background: var(--bg-secondary); }
+.obj-id {
+  font-size: 11px; font-weight: 600;
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.obj-title { font-size: 14px; font-weight: 500; color: var(--text-primary); flex: 1; line-height: 1.45; }
+.obj-chevron { font-size: 16px; color: var(--text-secondary); transition: transform 0.2s; }
 .obj-chevron.open { transform: rotate(180deg); }
 
-.obj-body { display: none; padding: 0 16px 16px; border-top: 0.5px solid var(--color-border-tertiary); }
+.obj-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
 .obj-body.open { display: block; }
 
-.section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); margin: 14px 0 8px; }
+.section-label {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 16px 0 9px;
+}
 
-.key-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.key-list li { font-size: 13px; color: var(--color-text-primary); padding-left: 14px; position: relative; line-height: 1.5; }
-.key-list li::before { content: "–"; position: absolute; left: 0; color: var(--color-text-secondary); }
+.key-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.key-list li { font-size: 13px; color: var(--text-primary); padding-left: 16px; position: relative; line-height: 1.55; }
+.key-list li::before { content: "–"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 
 .term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.term-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
-.term-name { font-size: 12px; font-weight: 500; color: #3C3489; margin-bottom: 4px; }
-.term-def { font-size: 12px; color: var(--color-text-secondary); line-height: 1.4; }
+.term-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.term-name { font-size: 12px; font-weight: 600; color: var(--accent-text); margin-bottom: 4px; }
+.term-def { font-size: 12px; color: var(--text-secondary); line-height: 1.45; }
 
 .flash-wrap { margin-top: 8px; }
-.flash-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 20px 16px; cursor: pointer; min-height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; user-select: none; border: 0.5px solid var(--color-border-tertiary); touch-action: manipulation; }
-.flash-q { font-size: 13px; color: var(--color-text-primary); font-weight: 500; line-height: 1.5; }
-.flash-a { font-size: 13px; color: #3C3489; line-height: 1.5; display: none; }
+.flash-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 22px 18px;
+  cursor: pointer;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  user-select: none;
+  border: 1px solid var(--border);
+  touch-action: manipulation;
+  transition: var(--transition), transform 0.1s;
+}
+.flash-card:active { transform: scale(0.98); }
+.flash-q { font-size: 14px; color: var(--text-primary); font-weight: 500; line-height: 1.55; }
+.flash-a { font-size: 14px; color: var(--accent-text); line-height: 1.55; display: none; font-weight: 500; }
 .flash-card.flipped .flash-q { display: none; }
 .flash-card.flipped .flash-a { display: block; }
-.flash-hint { font-size: 11px; color: var(--color-text-secondary); text-align: center; margin-top: 6px; }
-.flash-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; gap: 8px; }
-.flash-nav button { padding: 10px 16px; font-size: 13px; min-width: 70px; }
-.flash-count { font-size: 12px; color: var(--color-text-secondary); }
+.flash-hint { font-size: 11px; color: var(--text-secondary); text-align: center; margin-top: 7px; }
+.flash-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 8px; }
+.flash-nav button {
+  padding: 10px 20px;
+  font-size: 13px;
+  min-width: 80px;
+  font-family: var(--font-sans);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: var(--transition);
+}
+.flash-nav button:hover { background: var(--bg-secondary); }
+.flash-nav button:active { transform: scale(0.96); }
+.flash-count { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
 
-.tip-box { background: #EEEDFE; border-radius: var(--border-radius-md); padding: 10px 12px; margin-top: 8px; }
-.tip-text { font-size: 12px; color: #3C3489; line-height: 1.5; }
+.tip-box {
+  background: var(--accent-bg);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-top: 12px;
+  border-left: 3px solid var(--accent);
+  transition: var(--transition);
+}
+.tip-text { font-size: 13px; color: var(--accent-text); line-height: 1.55; }
 
 .progress-bar-wrap { margin-bottom: 1.5rem; }
-.progress-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; display: flex; justify-content: space-between; }
-.progress-bar { height: 4px; background: var(--color-background-secondary); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: #534AB7; border-radius: 2px; transition: width 0.3s; }
+.progress-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; display: flex; justify-content: space-between; font-weight: 500; }
+.progress-bar { height: 6px; background: var(--bg-secondary); border-radius: 3px; overflow: hidden; border: 1px solid var(--border); }
+.progress-fill { height: 100%; background: var(--progress-fill); border-radius: 3px; transition: width 0.4s ease; }
 
 @media (max-width: 600px) {
-  .sg-wrap { padding: 0.75rem 0; }
+  body { padding: 12px; }
+  .sg-title { font-size: 19px; }
   .term-grid { grid-template-columns: 1fr; }
-  .domain-tabs { gap: 6px; }
-  .tab-btn { font-size: 12px; padding: 8px 10px; }
+  .domain-tabs { gap: 5px; }
+  .tab-btn { font-size: 12px; padding: 7px 10px; }
   .obj-title { font-size: 13px; }
   .obj-body { padding: 0 12px 14px; }
   .key-list li { font-size: 13px; }
   .flash-q, .flash-a { font-size: 14px; }
-  .flash-nav button { padding: 12px 18px; font-size: 14px; }
+  .flash-nav button { padding: 12px 16px; font-size: 14px; min-width: 70px; }
   .flash-nav { gap: 6px; }
   .flash-count { font-size: 13px; }
   .tip-text { font-size: 13px; }
@@ -73,12 +222,21 @@ body { font-family: var(--font-sans); }
   .term-def { font-size: 13px; }
 }
 </style>
+</head>
+<body>
 
 <div class="sg-wrap">
   <h2 class="sr-only">CompTIA Project+ Study Guide — Weak Objectives</h2>
   <div class="sg-header">
-    <div class="sg-title">CompTIA Project+ Study Guide</div>
-    <div class="sg-sub">19 objectives to review · Tap any card to expand · Tap flashcard to reveal answer</div>
+    <div class="sg-header-row">
+      <div>
+        <div class="sg-title">CompTIA Project+ Study Guide</div>
+        <div class="sg-sub">19 objectives to review · Tap any card to expand · Tap flashcard to reveal answer</div>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
   </div>
 
   <div class="progress-bar-wrap">
@@ -775,4 +933,25 @@ window.prevFlash = function(id, e) {
 renderTabs();
 renderGrid();
 updateProgress();
+
+// Dark mode
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('sg-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+const _savedTheme = localStorage.getItem('sg-theme');
+if (_savedTheme) {
+  applyTheme(_savedTheme);
+} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  applyTheme('dark');
+} else {
+  applyTheme('light');
+}
 </script>
+</body>
+</html>
