@@ -1,0 +1,778 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+
+.sg-wrap { padding: 1rem 0; }
+.sg-header { margin-bottom: 1.5rem; }
+.sg-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.sg-sub { font-size: 14px; color: var(--color-text-secondary); margin-top: 4px; }
+
+.domain-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+.tab-btn { padding: 8px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; touch-action: manipulation; }
+.tab-btn:hover { background: var(--color-background-secondary); }
+.tab-btn.active { background: #3C3489; color: #EEEDFE; border-color: #3C3489; font-weight: 500; }
+
+.obj-grid { display: grid; gap: 12px; }
+.obj-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+.obj-header { padding: 14px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; user-select: none; touch-action: manipulation; }
+.obj-header:hover { background: var(--color-background-secondary); }
+.obj-id { font-size: 11px; font-weight: 500; background: #EEEDFE; color: #3C3489; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+.obj-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+.obj-chevron { font-size: 16px; color: var(--color-text-secondary); transition: transform 0.2s; }
+.obj-chevron.open { transform: rotate(180deg); }
+
+.obj-body { display: none; padding: 0 16px 16px; border-top: 0.5px solid var(--color-border-tertiary); }
+.obj-body.open { display: block; }
+
+.section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); margin: 14px 0 8px; }
+
+.key-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.key-list li { font-size: 13px; color: var(--color-text-primary); padding-left: 14px; position: relative; line-height: 1.5; }
+.key-list li::before { content: "–"; position: absolute; left: 0; color: var(--color-text-secondary); }
+
+.term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.term-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+.term-name { font-size: 12px; font-weight: 500; color: #3C3489; margin-bottom: 4px; }
+.term-def { font-size: 12px; color: var(--color-text-secondary); line-height: 1.4; }
+
+.flash-wrap { margin-top: 8px; }
+.flash-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 20px 16px; cursor: pointer; min-height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; user-select: none; border: 0.5px solid var(--color-border-tertiary); touch-action: manipulation; }
+.flash-q { font-size: 13px; color: var(--color-text-primary); font-weight: 500; line-height: 1.5; }
+.flash-a { font-size: 13px; color: #3C3489; line-height: 1.5; display: none; }
+.flash-card.flipped .flash-q { display: none; }
+.flash-card.flipped .flash-a { display: block; }
+.flash-hint { font-size: 11px; color: var(--color-text-secondary); text-align: center; margin-top: 6px; }
+.flash-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; gap: 8px; }
+.flash-nav button { padding: 10px 16px; font-size: 13px; min-width: 70px; }
+.flash-count { font-size: 12px; color: var(--color-text-secondary); }
+
+.tip-box { background: #EEEDFE; border-radius: var(--border-radius-md); padding: 10px 12px; margin-top: 8px; }
+.tip-text { font-size: 12px; color: #3C3489; line-height: 1.5; }
+
+.progress-bar-wrap { margin-bottom: 1.5rem; }
+.progress-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.progress-bar { height: 4px; background: var(--color-background-secondary); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: #534AB7; border-radius: 2px; transition: width 0.3s; }
+
+@media (max-width: 600px) {
+  .sg-wrap { padding: 0.75rem 0; }
+  .term-grid { grid-template-columns: 1fr; }
+  .domain-tabs { gap: 6px; }
+  .tab-btn { font-size: 12px; padding: 8px 10px; }
+  .obj-title { font-size: 13px; }
+  .obj-body { padding: 0 12px 14px; }
+  .key-list li { font-size: 13px; }
+  .flash-q, .flash-a { font-size: 14px; }
+  .flash-nav button { padding: 12px 18px; font-size: 14px; }
+  .flash-nav { gap: 6px; }
+  .flash-count { font-size: 13px; }
+  .tip-text { font-size: 13px; }
+  .term-name { font-size: 13px; }
+  .term-def { font-size: 13px; }
+}
+</style>
+
+<div class="sg-wrap">
+  <h2 class="sr-only">CompTIA Project+ Study Guide — Weak Objectives</h2>
+  <div class="sg-header">
+    <div class="sg-title">CompTIA Project+ Study Guide</div>
+    <div class="sg-sub">19 objectives to review · Tap any card to expand · Tap flashcard to reveal answer</div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-label"><span>Study progress</span><span id="prog-pct">0 of 19 reviewed</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="domain-tabs" id="domain-tabs"></div>
+  <div class="obj-grid" id="obj-grid"></div>
+</div>
+
+<script>
+const data = [
+  {
+    id: "1.1", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Explain the basic characteristics of a project and various methodologies and frameworks used in IT projects.",
+    keys: [
+      "A project has a defined start/end, unique deliverable, and temporary nature — distinct from operations (ongoing).",
+      "Triple constraint: scope, time, cost — changes to one affect the others. Quality is sometimes added as a 4th.",
+      "Waterfall: sequential phases (initiation → planning → execution → closing), each phase complete before the next.",
+      "Agile: iterative sprints, adaptive planning, frequent delivery. Scrum uses sprints, sprint reviews, retrospectives.",
+      "Kanban: visualize workflow on a board; limit work-in-progress (WIP); no fixed iterations.",
+      "Hybrid: combines Waterfall structure with Agile flexibility — common in IT.",
+      "PMBOK: PMI's process-based framework with 5 process groups and 10 knowledge areas.",
+      "PRINCE2: structured, stage-based methodology popular in UK/EU; business justification is key throughout.",
+      "Project manager, sponsor, stakeholders, project team, steering committee are common project roles."
+    ],
+    terms: [
+      { t: "Project", d: "Temporary endeavor with a unique outcome and defined start/end." },
+      { t: "Waterfall", d: "Linear sequential phases; rigid, documentation-heavy." },
+      { t: "Agile", d: "Iterative, collaborative, adaptive to change." },
+      { t: "Scrum", d: "Agile framework with sprints, stand-ups, retrospectives." },
+      { t: "Sprint", d: "Fixed time-box (1–4 weeks) in Scrum to deliver working product." },
+      { t: "Kanban", d: "Visual workflow with WIP limits; continuous flow." },
+      { t: "Hybrid", d: "Mix of Waterfall and Agile elements." },
+      { t: "PMBOK", d: "PMI framework; 5 process groups, 10 knowledge areas." },
+    ],
+    flashcards: [
+      { q: "What 3 constraints define the triple constraint?", a: "Scope, Time, and Cost (Iron Triangle). Quality is sometimes included as a 4th." },
+      { q: "How does a project differ from operations?", a: "Projects are temporary with a unique output; operations are ongoing and repetitive." },
+      { q: "What is a sprint in Scrum?", a: "A fixed-length iteration (1–4 weeks) that produces a potentially shippable product increment." },
+      { q: "What is the key principle of PRINCE2?", a: "Continued business justification — the project must remain justified at every stage." }
+    ],
+    tip: "Exam tip: Know which methodology fits a given scenario. Agile = changing requirements; Waterfall = fixed, well-defined scope; Hybrid = regulated industry with some flexibility."
+  },
+  {
+    id: "1.3", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Given a scenario, apply the change control process throughout the project life cycle.",
+    keys: [
+      "Change control prevents uncontrolled scope creep by requiring formal review of all changes.",
+      "Change request (CR) is submitted → logged in the change log → analyzed for impact → reviewed by CCB → approved/rejected → implemented if approved → documented.",
+      "CCB (Change Control Board): group of stakeholders who review and approve/reject change requests.",
+      "Impact analysis: assess changes to scope, schedule, cost, quality, risk before approving.",
+      "Approved changes must update the project management plan and relevant baselines.",
+      "Scope creep: unauthorized scope additions; gold plating: adding extras not in scope (both are bad).",
+      "Baseline: original approved plan. Changes are measured against it.",
+      "Emergency changes may bypass normal process but must be documented after the fact."
+    ],
+    terms: [
+      { t: "Change Request", d: "Formal document requesting a change to scope, schedule, cost, or quality." },
+      { t: "CCB", d: "Change Control Board — approves/rejects changes." },
+      { t: "Scope Creep", d: "Uncontrolled expansion of project scope without formal approval." },
+      { t: "Gold Plating", d: "Adding unrequested features beyond scope." },
+      { t: "Baseline", d: "Approved plan used to measure performance." },
+      { t: "Change Log", d: "Record of all change requests and their status." },
+    ],
+    flashcards: [
+      { q: "What is the correct order of the change control process?", a: "Submit CR → Log it → Impact analysis → CCB review → Approve/Reject → Implement → Document." },
+      { q: "What is scope creep?", a: "Uncontrolled additions to project scope without formal approval through change control." },
+      { q: "Who approves change requests?", a: "The Change Control Board (CCB), which includes key stakeholders." },
+      { q: "What must be updated after a change is approved?", a: "The project management plan and relevant baselines (scope, schedule, cost)." }
+    ],
+    tip: "Exam tip: If a scenario asks what to do when a stakeholder requests a new feature mid-project — always submit a formal change request, never just add it."
+  },
+  {
+    id: "1.4", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Given a scenario, perform risk management activities.",
+    keys: [
+      "Risk: uncertain event that may have a positive (opportunity) or negative (threat) impact.",
+      "Risk register: central document tracking all identified risks, probability, impact, owner, response.",
+      "Risk identification: brainstorming, interviews, SWOT, checklist analysis, lessons learned.",
+      "Qualitative analysis: prioritize risks using probability × impact matrix (PxI).",
+      "Quantitative analysis: numerical analysis — EMV (Expected Monetary Value = Probability × Impact $).",
+      "Risk responses for threats: Avoid, Transfer, Mitigate, Accept.",
+      "Risk responses for opportunities: Exploit, Share, Enhance, Accept.",
+      "Residual risk: risk remaining after response. Secondary risk: new risk created by a response.",
+      "Risk tolerance/appetite: how much risk stakeholders are willing to accept.",
+      "Contingency reserve: budget set aside for known risks. Management reserve: for unknown risks."
+    ],
+    terms: [
+      { t: "Risk Register", d: "Log of all identified risks with probability, impact, and response." },
+      { t: "EMV", d: "Expected Monetary Value = Probability × Impact in dollars." },
+      { t: "Mitigation", d: "Reduce probability or impact of a threat." },
+      { t: "Transfer", d: "Shift risk to a third party (insurance, contract)." },
+      { t: "Avoid", d: "Change plan to eliminate the risk entirely." },
+      { t: "Residual Risk", d: "Risk remaining after response strategies are applied." },
+      { t: "Secondary Risk", d: "New risk introduced by a risk response." },
+      { t: "Contingency Reserve", d: "Budget for known risks (identified in risk register)." },
+    ],
+    flashcards: [
+      { q: "What are the 4 threat response strategies?", a: "Avoid, Transfer, Mitigate, Accept." },
+      { q: "What are the 4 opportunity response strategies?", a: "Exploit, Share, Enhance, Accept." },
+      { q: "How is EMV calculated?", a: "EMV = Probability (%) × Impact ($). Used to quantify risk in dollar terms." },
+      { q: "What is the difference between residual and secondary risk?", a: "Residual = risk left after response. Secondary = new risk created by the response itself." },
+      { q: "What is a risk register?", a: "A document that logs all identified risks with their probability, impact, owner, and planned response." }
+    ],
+    tip: "Exam tip: Know all 4 threat AND 4 opportunity strategies cold. Questions often give a scenario and ask which response strategy is being used."
+  },
+  {
+    id: "1.5", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Given a scenario, perform issue management activities.",
+    keys: [
+      "Issue: a problem that has already occurred (vs. risk which is uncertain/future).",
+      "Issue log: tracks active issues — description, priority, owner, status, resolution date.",
+      "Issue must be assigned an owner who is responsible for resolving it.",
+      "Escalation: raising an unresolved issue to a higher level of authority when it can't be resolved at current level.",
+      "Issues can arise from risks that were not mitigated, or from unexpected events.",
+      "Issue resolution process: identify → log → assign owner → analyze → resolve → close and document.",
+      "Priority and severity help determine which issues to address first.",
+      "Distinguish: issue log (active problems) vs. risk register (potential future events)."
+    ],
+    terms: [
+      { t: "Issue", d: "A problem that has already occurred requiring resolution." },
+      { t: "Issue Log", d: "Tracks active issues, owners, status, and resolution." },
+      { t: "Escalation", d: "Elevating unresolved issues to higher authority." },
+      { t: "Issue Owner", d: "Person responsible for resolving a specific issue." },
+      { t: "Severity", d: "Degree of impact an issue has on the project." },
+    ],
+    flashcards: [
+      { q: "What is the difference between a risk and an issue?", a: "A risk is a potential future event. An issue is a problem that has already occurred." },
+      { q: "What should always be assigned when an issue is logged?", a: "An issue owner — someone responsible for resolving it." },
+      { q: "When is escalation appropriate?", a: "When an issue cannot be resolved at the current level of authority within an acceptable time frame." },
+      { q: "What document tracks active project issues?", a: "The issue log." }
+    ],
+    tip: "Exam tip: If a scenario describes something that 'has happened' — it's an issue. If it 'might happen' — it's a risk. Don't confuse the two."
+  },
+  {
+    id: "1.6", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Given a scenario, apply schedule development and management activities and techniques.",
+    keys: [
+      "WBS (Work Breakdown Structure): hierarchical decomposition of all project work into manageable components.",
+      "Activity sequencing: determine dependencies between tasks (FS, FF, SS, SF).",
+      "Finish-to-Start (FS): most common — successor can't start until predecessor finishes.",
+      "Critical Path Method (CPM): longest path through the network; activities on it have zero float.",
+      "Float (slack): amount of time an activity can be delayed without delaying project end.",
+      "PERT: uses 3 estimates — Optimistic, Most Likely, Pessimistic. Formula: (O + 4M + P) / 6.",
+      "Schedule compression: Crashing (add resources, increases cost) or Fast Tracking (overlap tasks, increases risk).",
+      "Gantt chart: bar chart showing tasks, duration, and dependencies over time.",
+      "Milestone: significant event or decision point; has zero duration.",
+      "Baseline schedule: approved schedule used to measure performance."
+    ],
+    terms: [
+      { t: "WBS", d: "Work Breakdown Structure — hierarchical task decomposition." },
+      { t: "Critical Path", d: "Longest path; determines project end date. Zero float." },
+      { t: "Float/Slack", d: "Time an activity can slip without delaying the project." },
+      { t: "Crashing", d: "Add resources to shorten duration; increases cost." },
+      { t: "Fast Tracking", d: "Overlap sequential tasks; increases risk." },
+      { t: "PERT", d: "Weighted average: (O + 4M + P) / 6." },
+      { t: "Milestone", d: "Key project event; zero duration." },
+      { t: "Gantt Chart", d: "Bar chart of tasks and timelines." },
+    ],
+    flashcards: [
+      { q: "What is the PERT formula?", a: "(Optimistic + 4 × Most Likely + Pessimistic) / 6" },
+      { q: "What is the critical path?", a: "The longest sequence of tasks that determines the minimum project duration. Activities on it have zero float." },
+      { q: "What is the difference between crashing and fast tracking?", a: "Crashing adds resources to shorten duration (costs more). Fast tracking overlaps tasks (adds risk)." },
+      { q: "What does float (slack) mean?", a: "The amount of time an activity can be delayed without delaying the project end date." },
+      { q: "What is Finish-to-Start dependency?", a: "The successor activity cannot start until the predecessor activity has finished." }
+    ],
+    tip: "Exam tip: Know the PERT formula and be able to identify which tasks are on the critical path. Critical path tasks = zero float."
+  },
+  {
+    id: "1.7", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Compare and contrast quality management concepts and performance management concepts.",
+    keys: [
+      "Quality planning: determine quality standards and how to achieve them (QMP - Quality Management Plan).",
+      "Quality assurance (QA): process-oriented; auditing processes to ensure standards are followed.",
+      "Quality control (QC): product-oriented; inspecting deliverables to find defects.",
+      "Cost of quality: includes cost of conformance (prevention, appraisal) and non-conformance (failures).",
+      "KPIs (Key Performance Indicators): measurable metrics to evaluate project success.",
+      "EVM (Earned Value Management): integrates scope, schedule, cost to measure performance.",
+      "SPI (Schedule Performance Index) = EV/PV. SPI > 1 = ahead of schedule.",
+      "CPI (Cost Performance Index) = EV/AC. CPI > 1 = under budget.",
+      "CV (Cost Variance) = EV – AC. SV (Schedule Variance) = EV – PV.",
+      "Six Sigma: data-driven quality improvement. DMAIC = Define, Measure, Analyze, Improve, Control.",
+      "Benchmarking: comparing project metrics to industry standards or past projects."
+    ],
+    terms: [
+      { t: "QA", d: "Quality Assurance — auditing processes, preventing defects." },
+      { t: "QC", d: "Quality Control — inspecting products, finding defects." },
+      { t: "EVM", d: "Earned Value Management — cost/schedule performance tracking." },
+      { t: "CPI", d: "Cost Performance Index = EV/AC." },
+      { t: "SPI", d: "Schedule Performance Index = EV/PV." },
+      { t: "DMAIC", d: "Six Sigma process: Define, Measure, Analyze, Improve, Control." },
+      { t: "Benchmarking", d: "Comparing performance against standards or peers." },
+      { t: "KPI", d: "Key Performance Indicator — measurable success metric." },
+    ],
+    flashcards: [
+      { q: "What is the difference between QA and QC?", a: "QA is process-focused (prevent defects). QC is product-focused (find defects). QA is proactive; QC is reactive." },
+      { q: "How do you calculate CPI?", a: "CPI = EV ÷ AC. CPI > 1 means you're under budget; < 1 means over budget." },
+      { q: "How do you calculate SPI?", a: "SPI = EV ÷ PV. SPI > 1 means ahead of schedule; < 1 means behind." },
+      { q: "What does DMAIC stand for?", a: "Define, Measure, Analyze, Improve, Control — the Six Sigma improvement methodology." }
+    ],
+    tip: "Exam tip: EVM formulas appear frequently. Remember: positive variance = good (under budget/ahead of schedule). CPI and SPI > 1.0 = good."
+  },
+  {
+    id: "1.8", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Compare and contrast communication management concepts.",
+    keys: [
+      "Communications management plan: documents who needs what info, when, in what format, and how.",
+      "Communication channels formula: n(n–1)/2 where n = number of stakeholders.",
+      "Active listening: fully concentrating, understanding, and responding to the speaker.",
+      "Pull communication: recipient pulls info (portals, intranet, repositories). Good for large audiences.",
+      "Push communication: sender pushes info (email, reports, memos). Good for specific audiences.",
+      "Interactive communication: real-time, two-way (meetings, phone calls). Best for complex topics.",
+      "Stakeholder engagement: active involvement to ensure support; assessed using power/interest grid.",
+      "Noise: anything that interferes with communication (language, culture, distractions).",
+      "Communication barriers: language, culture, technical jargon, physical distance.",
+      "Meeting management: agendas, time-keeping, action items, minutes/follow-up documentation."
+    ],
+    terms: [
+      { t: "Communication Channels", d: "n(n–1)/2 — total possible paths between n stakeholders." },
+      { t: "Push Communication", d: "Sender initiates (email, reports). No confirmation of receipt." },
+      { t: "Pull Communication", d: "Recipient retrieves (portals, wikis). Good for large groups." },
+      { t: "Interactive", d: "Real-time two-way (meetings, calls). Best for complex discussions." },
+      { t: "Active Listening", d: "Fully engaged listening; clarifying and responding thoughtfully." },
+      { t: "Comms Mgmt Plan", d: "Who gets what info, when, how, and in what format." },
+    ],
+    flashcards: [
+      { q: "What is the formula for communication channels?", a: "n(n–1)/2 where n = number of people. 5 people = 5×4/2 = 10 channels." },
+      { q: "What type of communication is best for complex, sensitive topics?", a: "Interactive communication (meetings, calls) — allows immediate feedback and clarification." },
+      { q: "What is the difference between push and pull communication?", a: "Push: sender delivers to recipient (email). Pull: recipient retrieves info themselves (portal/wiki)." },
+      { q: "What should a communications management plan define?", a: "Who needs what info, when they need it, in what format, and through what channel." }
+    ],
+    tip: "Exam tip: Memorize the channels formula. If a team grows from 5 to 10 people, channels go from 10 to 45 — that's a massive increase in complexity."
+  },
+  {
+    id: "1.11", domain: "Domain 1", domainName: "Project Mgmt Concepts",
+    title: "Explain important project procurement and vendor selection concepts.",
+    keys: [
+      "Procurement planning: determine what to buy, when, and how (make-or-buy analysis).",
+      "RFI (Request for Information): gather market info; no commitment to purchase.",
+      "RFP (Request for Proposal): request detailed proposals; used for complex, undefined requirements.",
+      "RFQ (Request for Quote): request pricing for well-defined goods/services.",
+      "SOW (Statement of Work): detailed description of work to be performed by vendor.",
+      "Contract types: Fixed-Price (FP), Time & Materials (T&M), Cost-Reimbursable (CR).",
+      "Fixed-Price: buyer knows cost upfront; risk is on the seller.",
+      "T&M: pay per hour + materials; risk shared; good for unknown scope.",
+      "Cost-Reimbursable: reimburse actual costs + fee; risk is on the buyer.",
+      "Vendor evaluation criteria: cost, capability, experience, references, compliance.",
+      "Contract closeout: verify deliverables, formal acceptance, release resources."
+    ],
+    terms: [
+      { t: "RFP", d: "Request for Proposal — complex needs, detailed proposals." },
+      { t: "RFQ", d: "Request for Quote — defined needs, pricing focus." },
+      { t: "RFI", d: "Request for Information — market research, no commitment." },
+      { t: "SOW", d: "Statement of Work — detailed vendor deliverable description." },
+      { t: "Fixed-Price", d: "Set price; seller bears cost overrun risk." },
+      { t: "T&M", d: "Time & Materials — hourly rate + costs; shared risk." },
+      { t: "Cost-Reimbursable", d: "Reimburse costs + fee; buyer bears risk." },
+      { t: "Make-or-Buy", d: "Analysis to decide internal vs external resource use." },
+    ],
+    flashcards: [
+      { q: "What is the difference between RFP, RFQ, and RFI?", a: "RFI = market research. RFQ = get pricing for defined work. RFP = get proposals for complex/undefined work." },
+      { q: "Which contract type puts the most risk on the seller?", a: "Fixed-Price — the seller bears all cost overrun risk." },
+      { q: "Which contract type puts the most risk on the buyer?", a: "Cost-Reimbursable — the buyer reimburses all actual costs." },
+      { q: "What is a SOW?", a: "Statement of Work — a detailed description of what the vendor is expected to deliver." }
+    ],
+    tip: "Exam tip: Contract type risk = if seller can lose money = risk is on seller (Fixed-Price). If buyer pays all costs = risk is on buyer (Cost-Reimbursable)."
+  },
+  {
+    id: "2.1", domain: "Domain 2", domainName: "Project Life Cycle",
+    title: "Explain the value of artifacts in the discovery/concept preparation phase for a project.",
+    keys: [
+      "Discovery phase occurs before formal project initiation — it explores feasibility and need.",
+      "Business case: justifies the project; includes problem statement, options, cost-benefit analysis, recommendation.",
+      "Feasibility study: assesses technical, financial, legal, and operational viability.",
+      "Project charter is NOT yet created — that happens in initiation.",
+      "Needs assessment: identifies the gap between current state and desired state.",
+      "Stakeholder identification begins here — key stakeholders shape the direction.",
+      "Preliminary scope: high-level scope is defined to guide the feasibility analysis.",
+      "These artifacts inform the go/no-go decision before resources are committed."
+    ],
+    terms: [
+      { t: "Business Case", d: "Document justifying why the project should be done." },
+      { t: "Feasibility Study", d: "Evaluates technical, financial, and operational viability." },
+      { t: "Needs Assessment", d: "Identifies gap between current and desired state." },
+      { t: "Discovery Phase", d: "Pre-initiation phase; exploration and concept validation." },
+      { t: "Go/No-Go Decision", d: "Formal decision to proceed or halt the project." },
+    ],
+    flashcards: [
+      { q: "What is the purpose of a business case?", a: "To justify the project by documenting the problem, options, cost-benefit, and recommended approach." },
+      { q: "What decision does the discovery phase support?", a: "The go/no-go decision — whether to formally initiate the project." },
+      { q: "What does a feasibility study assess?", a: "Technical, financial, legal, and operational viability of the proposed project." },
+      { q: "Is the project charter created in the discovery phase?", a: "No. The project charter is created during initiation, after the discovery phase." }
+    ],
+    tip: "Exam tip: Discovery = before initiation. Business case and feasibility study come BEFORE the charter. Know the order."
+  },
+  {
+    id: "2.2", domain: "Domain 2", domainName: "Project Life Cycle",
+    title: "Given a scenario, perform activities during the project initiation phase.",
+    keys: [
+      "Project charter: formally authorizes the project; created in initiation; signed by sponsor.",
+      "Charter includes: project purpose, objectives, high-level scope, milestones, budget, PM authority.",
+      "Stakeholder register: identifies all stakeholders and their interests, influence, and engagement.",
+      "Project sponsor: provides funding and executive authority; formally authorizes the project.",
+      "Project manager: assigned during initiation; has authority to use resources as defined in charter.",
+      "SMART objectives: Specific, Measurable, Achievable, Relevant, Time-bound.",
+      "Kick-off meeting: held after charter is approved; aligns team on goals and approach.",
+      "Assumptions and constraints are documented in initiation."
+    ],
+    terms: [
+      { t: "Project Charter", d: "Formally authorizes the project; grants PM authority." },
+      { t: "Stakeholder Register", d: "Identifies stakeholders, interests, and influence level." },
+      { t: "Project Sponsor", d: "Executive who authorizes and funds the project." },
+      { t: "SMART Objectives", d: "Specific, Measurable, Achievable, Relevant, Time-bound." },
+      { t: "Kick-off Meeting", d: "Formal meeting to launch the project after charter approval." },
+      { t: "Assumptions", d: "Factors assumed true for planning; must be documented." },
+    ],
+    flashcards: [
+      { q: "What document formally authorizes a project?", a: "The project charter, signed by the project sponsor." },
+      { q: "What is the PM's authority derived from?", a: "The project charter — it grants the PM the authority to apply resources." },
+      { q: "What does SMART stand for?", a: "Specific, Measurable, Achievable, Relevant, Time-bound." },
+      { q: "When is the kick-off meeting held?", a: "After the project charter is approved, at the start of the project." }
+    ],
+    tip: "Exam tip: The project charter is the key initiation deliverable. Without it, the project is not formally authorized. Sponsor signs it."
+  },
+  {
+    id: "2.3", domain: "Domain 2", domainName: "Project Life Cycle",
+    title: "Given a scenario, perform activities during the project planning phase.",
+    keys: [
+      "Project Management Plan (PMP): master document integrating all subsidiary plans.",
+      "Subsidiary plans: scope, schedule, cost, quality, risk, comms, procurement, HR, stakeholder plans.",
+      "Scope baseline = WBS + WBS dictionary + scope statement.",
+      "Schedule baseline: approved schedule used to measure performance.",
+      "Cost baseline: approved budget (cost + contingency). Not to be confused with management reserve.",
+      "Requirements gathering: interviews, surveys, workshops, prototyping, observation.",
+      "Requirements traceability matrix: links requirements to deliverables and test cases.",
+      "Resource planning: identify and acquire human, equipment, and material resources.",
+      "Planning is iterative — plans are progressively elaborated as more info becomes available."
+    ],
+    terms: [
+      { t: "Project Mgmt Plan", d: "Master plan integrating all subsidiary management plans." },
+      { t: "Scope Baseline", d: "WBS + WBS dictionary + scope statement." },
+      { t: "Requirements Matrix", d: "Traces requirements to deliverables and tests." },
+      { t: "Progressive Elaboration", d: "Refining the plan as more info becomes available." },
+      { t: "Cost Baseline", d: "Approved budget for measuring cost performance." },
+      { t: "WBS Dictionary", d: "Detailed descriptions of each WBS component." },
+    ],
+    flashcards: [
+      { q: "What makes up the scope baseline?", a: "The scope statement + WBS + WBS dictionary." },
+      { q: "What is progressive elaboration?", a: "The process of iteratively refining the project plan as more information becomes available." },
+      { q: "What does a requirements traceability matrix do?", a: "Links requirements to their source, WBS deliverables, and test cases — ensures nothing is missed." },
+      { q: "What is the project management plan?", a: "The master document that integrates all subsidiary plans (scope, schedule, cost, risk, etc.)." }
+    ],
+    tip: "Exam tip: Know what belongs in each baseline. Scope baseline ≠ just the WBS. It includes the WBS dictionary and scope statement too."
+  },
+  {
+    id: "2.4", domain: "Domain 2", domainName: "Project Life Cycle",
+    title: "Given a scenario, perform activities during the project execution phase.",
+    keys: [
+      "Execution: where the actual work is done to produce deliverables per the PMP.",
+      "Direct and manage project work: coordinate people, processes, and resources.",
+      "Quality assurance: auditing processes during execution to ensure standards are met.",
+      "Team development: training, team building, motivation, conflict resolution.",
+      "Conflict resolution methods: Collaborate/Problem-Solve (best), Compromise, Accommodate, Avoid, Force.",
+      "Procurement: executing contracts, managing vendor relationships.",
+      "Status reports: communicate project progress to stakeholders regularly.",
+      "Change requests may arise during execution — must go through change control.",
+      "Performance data is collected during execution and compared to baselines."
+    ],
+    terms: [
+      { t: "Collaborate", d: "Win-win conflict resolution; both parties fully satisfied." },
+      { t: "Compromise", d: "Both parties give something; neither fully satisfied." },
+      { t: "Force/Direct", d: "One party's view imposed; creates losers." },
+      { t: "Status Report", d: "Regular update on project progress vs. plan." },
+      { t: "Team Building", d: "Activities to improve team cohesion and performance." },
+      { t: "Tuckman Ladder", d: "Forming, Storming, Norming, Performing, Adjourning." },
+    ],
+    flashcards: [
+      { q: "What is the best conflict resolution method?", a: "Collaborate/Problem-Solve — both parties work together to find a win-win solution." },
+      { q: "What is Tuckman's ladder of team development?", a: "Forming → Storming → Norming → Performing → Adjourning." },
+      { q: "What happens to change requests generated during execution?", a: "They must go through the formal change control process (CCB review and approval)." },
+      { q: "What type of quality activity happens during execution?", a: "Quality Assurance — auditing processes to ensure they meet standards (not just inspecting products)." }
+    ],
+    tip: "Exam tip: Execution is where most project work happens. Know the 5 conflict resolution modes in order of preference: Collaborate > Compromise > Accommodate > Avoid > Force."
+  },
+  {
+    id: "2.5", domain: "Domain 2", domainName: "Project Life Cycle",
+    title: "Explain the importance of activities performed during the closing phase.",
+    keys: [
+      "Formal acceptance: client/sponsor formally accepts all deliverables (sign-off).",
+      "Lessons learned: document what went well, what didn't, and recommendations for future projects.",
+      "Release resources: formally release team members, equipment, and contracts.",
+      "Close contracts: verify all contract terms met, formally close with vendors.",
+      "Archive project documents: store all records for future reference.",
+      "Final report: summarizes project performance vs. plan (scope, schedule, cost, quality).",
+      "Celebrate success: recognize team contributions.",
+      "Transition plan: hand off deliverables to operations/maintenance team.",
+      "Scope verification: confirm all deliverables were completed and accepted."
+    ],
+    terms: [
+      { t: "Lessons Learned", d: "Documentation of successes and failures for future reference." },
+      { t: "Formal Acceptance", d: "Sponsor/client sign-off confirming deliverables are complete." },
+      { t: "Contract Closeout", d: "Confirming all contract terms met and formally closing." },
+      { t: "Final Report", d: "Summarizes project performance vs. original baselines." },
+      { t: "Transition Plan", d: "Plan for handing deliverables to ongoing operations." },
+    ],
+    flashcards: [
+      { q: "What is the purpose of lessons learned?", a: "To document successes and failures so future projects can benefit from the experience." },
+      { q: "What must happen before a project can formally close?", a: "Formal acceptance — the sponsor/client must sign off that all deliverables are complete and accepted." },
+      { q: "What is included in the final project report?", a: "Summary of project performance vs. scope, schedule, cost, and quality baselines." },
+      { q: "Why is it important to formally release resources?", a: "To free team members for other projects and ensure vendors/contracts are properly closed." }
+    ],
+    tip: "Exam tip: Closing must include formal acceptance, lessons learned, and contract closeout. Projects can be closed early if cancelled — same activities still apply."
+  },
+  {
+    id: "3.1", domain: "Domain 3", domainName: "Tools & Documentation",
+    title: "Given a scenario, use the appropriate tools throughout the project life cycle.",
+    keys: [
+      "Gantt chart: schedule visualization; shows tasks, duration, dependencies, milestones.",
+      "Network diagram (PDM): shows task dependencies; used to find critical path.",
+      "RACI matrix: Responsible, Accountable, Consulted, Informed — defines team roles per task.",
+      "Risk register: tracks risks throughout the project lifecycle.",
+      "Issue log: tracks active problems requiring resolution.",
+      "Kanban board: visualizes workflow; used in Agile/hybrid projects.",
+      "Burndown chart: shows remaining work vs. time; used in Agile sprints.",
+      "Project dashboard: high-level visual summary of project status.",
+      "WBS: used during planning to decompose scope.",
+      "Change log: tracks all change requests and their status."
+    ],
+    terms: [
+      { t: "RACI Matrix", d: "Responsible, Accountable, Consulted, Informed — roles chart." },
+      { t: "Burndown Chart", d: "Agile tool showing remaining work in a sprint over time." },
+      { t: "Network Diagram", d: "Shows task dependencies; used for critical path analysis." },
+      { t: "Dashboard", d: "High-level visual summary of project health/status." },
+      { t: "Kanban Board", d: "Visual workflow board with WIP limits." },
+      { t: "Change Log", d: "Tracks all change requests and current status." },
+    ],
+    flashcards: [
+      { q: "Which tool is used to find the critical path?", a: "Network diagram (PDM — Precedence Diagramming Method)." },
+      { q: "What does RACI stand for?", a: "Responsible, Accountable, Consulted, Informed. Used to define roles for each task." },
+      { q: "What does a burndown chart show?", a: "The amount of work remaining in a sprint vs. time. Used in Agile." },
+      { q: "Which tool would you use to track who needs to be told about a decision?", a: "RACI matrix — the 'I' (Informed) column identifies those who should be notified." }
+    ],
+    tip: "Exam tip: Match the tool to the scenario. Agile → Kanban/burndown. Schedule → Gantt/network diagram. Roles → RACI. Status → Dashboard."
+  },
+  {
+    id: "3.2", domain: "Domain 3", domainName: "Tools & Documentation",
+    title: "Compare and contrast various project management productivity tools.",
+    keys: [
+      "Traditional PM tools: MS Project, Smartsheet — Gantt-based, Waterfall-friendly.",
+      "Agile tools: Jira, Trello, Azure DevOps — backlog management, sprint planning, kanban.",
+      "Collaboration tools: Slack, Microsoft Teams, SharePoint, Confluence — comms and docs.",
+      "Video conferencing: Zoom, MS Teams — remote meetings and communication.",
+      "Document management: SharePoint, Google Drive, Confluence — version control, access.",
+      "Time tracking: Harvest, Toggl — track hours by task or project.",
+      "Portfolio management tools: manage multiple projects simultaneously.",
+      "Choose tools based on team size, methodology, budget, and integration needs.",
+      "Tool selection should support the communication management plan."
+    ],
+    terms: [
+      { t: "MS Project", d: "Microsoft's Gantt-based PM tool for Waterfall planning." },
+      { t: "Jira", d: "Agile PM tool for backlog, sprints, and issue tracking." },
+      { t: "Trello", d: "Kanban-based visual board tool; simple and flexible." },
+      { t: "Confluence", d: "Team wiki/documentation platform, often used with Jira." },
+      { t: "SharePoint", d: "Microsoft collaboration/document management platform." },
+    ],
+    flashcards: [
+      { q: "Which type of PM tool is best suited for Agile/Scrum projects?", a: "Agile tools like Jira or Azure DevOps — they support backlog management, sprints, and kanban boards." },
+      { q: "What is the primary difference between Jira and MS Project?", a: "Jira is Agile-focused (sprints, backlogs). MS Project is Waterfall-focused (Gantt, critical path)." },
+      { q: "What should drive tool selection for a project?", a: "Team size, methodology (Agile vs. Waterfall), budget, and integration with existing systems." }
+    ],
+    tip: "Exam tip: Questions may describe a project and ask which tool fits. Agile → Jira/Trello. Waterfall → MS Project. Collaboration → Teams/Slack/SharePoint."
+  },
+  {
+    id: "3.3", domain: "Domain 3", domainName: "Tools & Documentation",
+    title: "Given a scenario, analyze quality and performance charts to inform project decisions.",
+    keys: [
+      "Control chart: tracks process performance over time; shows control limits (UCL/LCL) and mean.",
+      "Rule of 7: 7 consecutive data points on one side of the mean = process out of control.",
+      "Pareto chart: bar chart ordered by frequency; identifies the vital few causes (80/20 rule).",
+      "Histogram: shows frequency distribution of defects or data.",
+      "Scatter diagram: shows correlation between two variables.",
+      "Run chart: tracks data over time; simpler than control chart (no control limits).",
+      "EVM charts: plot EV, PV, AC over time to show cost and schedule trends.",
+      "Burndown chart: used in Agile to track remaining story points over a sprint.",
+      "Fishbone (Ishikawa) diagram: root cause analysis tool; causes mapped to effect."
+    ],
+    terms: [
+      { t: "Control Chart", d: "Tracks process variation; has UCL, mean, and LCL lines." },
+      { t: "Pareto Chart", d: "Bar chart showing causes by frequency; 80/20 rule." },
+      { t: "Fishbone Diagram", d: "Root cause analysis; causes shown as fish bones." },
+      { t: "Histogram", d: "Frequency distribution chart for defect analysis." },
+      { t: "Scatter Diagram", d: "Shows correlation between two variables." },
+      { t: "Rule of Seven", d: "7 consecutive points on one side = out of control." },
+    ],
+    flashcards: [
+      { q: "What does the Rule of Seven indicate on a control chart?", a: "Seven consecutive data points on one side of the mean signal a non-random pattern — the process is out of control even if within limits." },
+      { q: "What is a Pareto chart used for?", a: "Identifying the most frequent causes of defects (80% of problems come from 20% of causes)." },
+      { q: "What type of chart shows the relationship between two variables?", a: "Scatter diagram." },
+      { q: "What tool is used to identify root causes of a problem?", a: "Fishbone (Ishikawa/cause-and-effect) diagram." }
+    ],
+    tip: "Exam tip: Know what each quality chart is used for. Control chart → monitor ongoing process. Pareto → prioritize causes. Fishbone → root cause analysis."
+  },
+  {
+    id: "4.1", domain: "Domain 4", domainName: "Compliance & Governance",
+    title: "Summarize basic environmental and social governance (ESG) factors related to project management activities.",
+    keys: [
+      "ESG = Environmental, Social, and Governance — framework for responsible project delivery.",
+      "Environmental factors: carbon footprint, energy use, waste management, sustainable materials.",
+      "Social factors: labor practices, diversity/inclusion, community impact, worker safety.",
+      "Governance factors: ethics, transparency, compliance with laws, accountability.",
+      "ESG considerations may be included in vendor selection criteria.",
+      "Regulatory compliance: projects must meet applicable laws (OSHA, EPA, GDPR, etc.).",
+      "Corporate social responsibility (CSR) aligns with ESG principles.",
+      "ESG reporting may be required for some project sponsors or industries."
+    ],
+    terms: [
+      { t: "ESG", d: "Environmental, Social, Governance — sustainability framework." },
+      { t: "Environmental", d: "Carbon footprint, energy, waste, sustainability." },
+      { t: "Social", d: "Diversity, labor rights, community impact, safety." },
+      { t: "Governance", d: "Ethics, compliance, accountability, transparency." },
+      { t: "CSR", d: "Corporate Social Responsibility — ethical business practices." },
+    ],
+    flashcards: [
+      { q: "What do the three letters in ESG stand for?", a: "Environmental, Social, and Governance." },
+      { q: "Give an example of a governance ESG factor in project management.", a: "Ensuring the project complies with all applicable laws and regulations; maintaining ethical vendor relationships." },
+      { q: "How might ESG factors affect vendor selection?", a: "Vendors may be evaluated on sustainability practices, labor standards, and ethical governance as part of selection criteria." }
+    ],
+    tip: "Exam tip: ESG is increasingly tested on CompTIA exams. Know one example per letter: E = carbon/sustainability, S = labor/diversity, G = compliance/ethics."
+  },
+  {
+    id: "4.2", domain: "Domain 4", domainName: "Compliance & Governance",
+    title: "Explain relevant information security concepts impacting project management.",
+    keys: [
+      "CIA Triad: Confidentiality, Integrity, Availability — core security objectives.",
+      "Data classification: Public, Internal, Confidential, Restricted — determine handling requirements.",
+      "Privacy requirements: GDPR, HIPAA, PCI-DSS may apply depending on the project.",
+      "Access control: principle of least privilege — users get minimum access needed.",
+      "Security must be planned from the start; not added as an afterthought.",
+      "NDAs (Non-Disclosure Agreements): protect confidential info shared with vendors/team.",
+      "Security incidents must be reported; have an incident response plan.",
+      "Physical security: protect hardware, facilities, and assets used in the project.",
+      "Data retention and destruction policies must be followed at project close."
+    ],
+    terms: [
+      { t: "CIA Triad", d: "Confidentiality, Integrity, Availability — security pillars." },
+      { t: "Least Privilege", d: "Grant only the minimum access necessary." },
+      { t: "NDA", d: "Non-Disclosure Agreement — protects confidential information." },
+      { t: "GDPR", d: "EU data privacy regulation; applies to personal data handling." },
+      { t: "Data Classification", d: "Categories (Public/Confidential) dictating data handling." },
+      { t: "Incident Response", d: "Plan for detecting, responding to, and recovering from security incidents." },
+    ],
+    flashcards: [
+      { q: "What does the CIA Triad stand for?", a: "Confidentiality, Integrity, and Availability — the three pillars of information security." },
+      { q: "What is the principle of least privilege?", a: "Users should only be given the minimum level of access needed to perform their job." },
+      { q: "When should security be considered in a project?", a: "From the beginning — security requirements should be planned upfront, not bolted on later." },
+      { q: "What is the purpose of an NDA in project management?", a: "To legally protect confidential information shared with vendors, contractors, or team members." }
+    ],
+    tip: "Exam tip: CIA Triad is foundational. Also know that GDPR and HIPAA are regulatory frameworks — violating them can shut a project down."
+  },
+  {
+    id: "4.4", domain: "Domain 4", domainName: "Compliance & Governance",
+    title: "Summarize basic IT concepts relevant to IT project management.",
+    keys: [
+      "SDLC (Software Development Life Cycle): structured process for developing software — planning, analysis, design, implementation, testing, maintenance.",
+      "Infrastructure projects: involve servers, networking, storage, cloud migration, or hardware upgrades.",
+      "Cloud computing models: IaaS (infra), PaaS (platform), SaaS (software) — as-a-Service.",
+      "Cloud deployment: Public, Private, Hybrid, Community cloud.",
+      "DevOps: cultural approach combining development and operations; emphasizes CI/CD.",
+      "CI/CD: Continuous Integration/Continuous Delivery — automated build and deploy pipelines.",
+      "Testing types: unit, integration, system, user acceptance testing (UAT).",
+      "UAT: end-users test to confirm the system meets business requirements before go-live.",
+      "Technical debt: deferred work that must eventually be addressed (shortcuts that create future problems).",
+      "Change management: managing people-side of technology transitions."
+    ],
+    terms: [
+      { t: "SDLC", d: "Software Development Life Cycle — structured software development process." },
+      { t: "IaaS/PaaS/SaaS", d: "Cloud service models: Infrastructure, Platform, Software." },
+      { t: "DevOps", d: "Dev + Ops culture; emphasizes automation and collaboration." },
+      { t: "CI/CD", d: "Continuous Integration/Delivery — automated build and deployment." },
+      { t: "UAT", d: "User Acceptance Testing — users validate system meets requirements." },
+      { t: "Technical Debt", d: "Cost of shortcuts taken now that create future rework." },
+    ],
+    flashcards: [
+      { q: "What are the three cloud service models?", a: "IaaS (Infrastructure), PaaS (Platform), SaaS (Software) — each as-a-Service." },
+      { q: "What is UAT?", a: "User Acceptance Testing — end users test the system to verify it meets business needs before go-live." },
+      { q: "What is technical debt?", a: "The implied cost of cutting corners now (e.g., skipping documentation or testing) that must be paid back as rework later." },
+      { q: "What does DevOps emphasize?", a: "Collaboration between development and operations teams, with automation, CI/CD, and continuous improvement." }
+    ],
+    tip: "Exam tip: Know the 3 cloud service models and what each provides. IaaS = you manage OS+up. PaaS = you manage app+up. SaaS = vendor manages everything."
+  }
+];
+
+const domains = [...new Set(data.map(o => o.domain))];
+const domainNames = {};
+data.forEach(o => { domainNames[o.domain] = o.domainName; });
+
+let activeDomain = "All";
+let openCards = new Set();
+let flashState = {};
+let reviewed = new Set();
+data.forEach(o => { flashState[o.id] = { idx: 0, flipped: false }; });
+
+function updateProgress() {
+  const pct = Math.round((reviewed.size / data.length) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = `${reviewed.size} of ${data.length} reviewed`;
+}
+
+function renderTabs() {
+  const cont = document.getElementById('domain-tabs');
+  cont.innerHTML = '';
+  ['All', ...domains].forEach(d => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (activeDomain === d ? ' active' : '');
+    btn.textContent = d === 'All' ? 'All Objectives' : `${d}: ${domainNames[d]}`;
+    btn.onclick = () => { activeDomain = d; renderTabs(); renderGrid(); };
+    cont.appendChild(btn);
+  });
+}
+
+function renderGrid() {
+  const cont = document.getElementById('obj-grid');
+  const filtered = activeDomain === 'All' ? data : data.filter(o => o.domain === activeDomain);
+  cont.innerHTML = '';
+  filtered.forEach(obj => {
+    const card = document.createElement('div');
+    card.className = 'obj-card';
+    const isOpen = openCards.has(obj.id);
+    const fs = flashState[obj.id];
+
+    card.innerHTML = `
+      <div class="obj-header" onclick="toggleCard('${obj.id}')">
+        <span class="obj-id">${obj.id}</span>
+        <span class="obj-title">${obj.title}</span>
+        <i class="ti ti-chevron-down obj-chevron ${isOpen ? 'open' : ''}" aria-hidden="true"></i>
+      </div>
+      <div class="obj-body ${isOpen ? 'open' : ''}" id="body-${obj.id}">
+        <div class="section-label">Key concepts</div>
+        <ul class="key-list">${obj.keys.map(k => `<li>${k}</li>`).join('')}</ul>
+
+        <div class="section-label">Terms to know</div>
+        <div class="term-grid">${obj.terms.map(t => `<div class="term-card"><div class="term-name">${t.t}</div><div class="term-def">${t.d}</div></div>`).join('')}</div>
+
+        <div class="section-label">Flashcards (${obj.flashcards.length} cards)</div>
+        <div class="flash-wrap">
+          <div class="flash-card ${fs.flipped ? 'flipped' : ''}" id="flash-${obj.id}" onclick="flipCard('${obj.id}')">
+            <div class="flash-q">${obj.flashcards[fs.idx].q}</div>
+            <div class="flash-a">${obj.flashcards[fs.idx].a}</div>
+          </div>
+          <div class="flash-hint">Tap to ${fs.flipped ? 'hide answer' : 'reveal answer'}</div>
+          <div class="flash-nav">
+            <button onclick="prevFlash('${obj.id}', event)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Prev</button>
+            <span class="flash-count">${fs.idx + 1} / ${obj.flashcards.length}</span>
+            <button onclick="nextFlash('${obj.id}', event)">Next <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+        <div class="tip-box"><div class="tip-text"><strong>💡 Exam tip:</strong> ${obj.tip.replace('Exam tip: ', '')}</div></div>
+      </div>
+    `;
+    cont.appendChild(card);
+  });
+}
+
+window.toggleCard = function(id) {
+  if (openCards.has(id)) { openCards.delete(id); }
+  else { openCards.add(id); reviewed.add(id); updateProgress(); }
+  renderGrid();
+};
+
+window.flipCard = function(id) {
+  flashState[id].flipped = !flashState[id].flipped;
+  renderGrid();
+};
+
+window.nextFlash = function(id, e) {
+  e.stopPropagation();
+  const obj = data.find(o => o.id === id);
+  flashState[id].idx = (flashState[id].idx + 1) % obj.flashcards.length;
+  flashState[id].flipped = false;
+  renderGrid();
+};
+
+window.prevFlash = function(id, e) {
+  e.stopPropagation();
+  const obj = data.find(o => o.id === id);
+  flashState[id].idx = (flashState[id].idx - 1 + obj.flashcards.length) % obj.flashcards.length;
+  flashState[id].flipped = false;
+  renderGrid();
+};
+
+renderTabs();
+renderGrid();
+updateProgress();
+</script>
