@@ -204,6 +204,56 @@ body {
 .progress-bar { height: 6px; background: var(--bg-secondary); border-radius: 3px; overflow: hidden; border: 1px solid var(--border); }
 .progress-fill { height: 100%; background: var(--progress-fill); border-radius: 3px; transition: width 0.4s ease; }
 
+/* Quiz */
+.quiz-wrap { margin-top: 8px; }
+.quiz-q { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.5; }
+.quiz-opts { display: flex; flex-direction: column; gap: 7px; margin-bottom: 10px; }
+.quiz-opt {
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: var(--transition);
+  line-height: 1.45;
+  width: 100%;
+}
+.quiz-opt:hover:not([disabled]) { background: var(--accent-bg); border-color: var(--accent); }
+.quiz-opt.correct { background: #d1fae5; border-color: #059669; color: #065f46; font-weight: 600; }
+.quiz-opt.incorrect { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+[data-theme="dark"] .quiz-opt.correct { background: #064e3b; border-color: #059669; color: #6ee7b7; }
+[data-theme="dark"] .quiz-opt.incorrect { background: #450a0a; border-color: #dc2626; color: #fca5a5; }
+.quiz-feedback { font-size: 12px; font-weight: 600; margin: 0 0 8px; padding: 8px 12px; border-radius: var(--radius-md); }
+.quiz-correct-msg { background: #d1fae5; color: #065f46; border: 1px solid #059669; }
+.quiz-wrong-msg { background: #fee2e2; color: #991b1b; border: 1px solid #dc2626; }
+[data-theme="dark"] .quiz-correct-msg { background: #064e3b; color: #6ee7b7; border-color: #059669; }
+[data-theme="dark"] .quiz-wrong-msg { background: #450a0a; color: #fca5a5; border-color: #dc2626; }
+.quiz-next, .quiz-retry {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  touch-action: manipulation;
+  transition: var(--transition);
+  margin-bottom: 8px;
+}
+.quiz-next:hover, .quiz-retry:hover { opacity: 0.88; }
+.quiz-progress { font-size: 11px; color: var(--text-secondary); text-align: right; font-weight: 500; margin-top: 4px; }
+.quiz-result { text-align: center; padding: 20px 0; }
+.quiz-score { font-size: 26px; font-weight: 700; color: var(--accent-text); margin-bottom: 6px; }
+.quiz-score-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; }
+
 @media (max-width: 600px) {
   body { padding: 12px; }
   .sg-title { font-size: 19px; }
@@ -831,6 +881,121 @@ const data = [
   }
 ];
 
+const quizData = {
+  "1.1": [
+    { q: "What best describes a project?", options: ["Ongoing repetitive work", "Temporary endeavor with a unique outcome", "A permanent organizational function", "A department within a company"], answer: 1 },
+    { q: "Which methodology uses fixed-length sprints?", options: ["Waterfall", "PRINCE2", "Scrum", "Kanban"], answer: 2 },
+    { q: "What are the three components of the triple constraint?", options: ["Scope, Quality, Risk", "Time, Cost, Resources", "Scope, Time, Cost", "Budget, Schedule, People"], answer: 2 },
+    { q: "Which methodology is sequential and documentation-heavy?", options: ["Agile", "Kanban", "Scrum", "Waterfall"], answer: 3 }
+  ],
+  "1.3": [
+    { q: "Who approves formal change requests?", options: ["Project Manager", "Project Team", "Change Control Board", "Project Sponsor"], answer: 2 },
+    { q: "What is scope creep?", options: ["Reducing project scope", "Formally approved scope additions", "Uncontrolled scope additions without approval", "Crashing the schedule"], answer: 2 },
+    { q: "What is the correct first step when a stakeholder requests a new feature mid-project?", options: ["Implement it immediately", "Submit a formal change request", "Reject it outright", "Escalate to the sponsor"], answer: 1 },
+    { q: "What is a baseline used for?", options: ["Training new team members", "Measuring project performance", "Identifying risks", "Hiring vendors"], answer: 1 }
+  ],
+  "1.4": [
+    { q: "How is EMV (Expected Monetary Value) calculated?", options: ["Impact ÷ Probability", "Probability + Impact", "Probability × Impact ($)", "Impact − Probability"], answer: 2 },
+    { q: "Which risk response strategy involves shifting risk to a third party?", options: ["Avoid", "Mitigate", "Transfer", "Accept"], answer: 2 },
+    { q: "What is residual risk?", options: ["New risk created by a response", "Risk remaining after responses are applied", "A high-priority unmitigated risk", "An unidentified risk"], answer: 1 },
+    { q: "What are the four threat response strategies?", options: ["Exploit, Share, Enhance, Accept", "Avoid, Transfer, Mitigate, Accept", "Reduce, Transfer, Eliminate, Accept", "Prevent, Deflect, Monitor, Accept"], answer: 1 }
+  ],
+  "1.5": [
+    { q: "What is an issue (distinct from a risk)?", options: ["A potential future problem", "A problem that has already occurred", "A formal change request", "An unmitigated risk"], answer: 1 },
+    { q: "What must every logged issue be assigned?", options: ["A budget", "An owner", "A work package", "A contingency reserve"], answer: 1 },
+    { q: "When is escalation appropriate?", options: ["For every issue", "Never — PMs should resolve all issues", "When an issue cannot be resolved at the current authority level", "Only for budget-related issues"], answer: 2 },
+    { q: "What document tracks active project issues?", options: ["Risk register", "Change log", "Issue log", "Lessons learned"], answer: 2 }
+  ],
+  "1.6": [
+    { q: "What is the PERT weighted average formula?", options: ["(O + M + P) / 3", "(O + 4M + P) / 6", "(O + 2M + P) / 4", "(O + 3M + P) / 5"], answer: 1 },
+    { q: "Activities on the critical path have:", options: ["The most resources", "The longest float", "Zero float", "Negative float"], answer: 2 },
+    { q: "Crashing a schedule involves:", options: ["Overlapping sequential tasks", "Reducing project scope", "Adding resources to shorten duration", "Removing non-critical tasks"], answer: 2 },
+    { q: "Fast tracking differs from crashing because it:", options: ["Adds cost but reduces risk", "Overlaps sequential tasks, increasing risk", "Adds resources to save time", "Removes milestones from the schedule"], answer: 1 }
+  ],
+  "1.7": [
+    { q: "Quality Assurance (QA) is best described as:", options: ["Inspecting products for defects", "Auditing processes to prevent defects", "Testing deliverables after completion", "Reviewing vendor work quality"], answer: 1 },
+    { q: "A CPI of 1.2 means the project is:", options: ["Over budget", "Behind schedule", "Under budget", "Ahead of schedule"], answer: 2 },
+    { q: "An SPI less than 1.0 means the project is:", options: ["Ahead of schedule", "Behind schedule", "Under budget", "Over budget"], answer: 1 },
+    { q: "What does DMAIC stand for?", options: ["Design, Monitor, Analyze, Implement, Control", "Define, Measure, Analyze, Improve, Control", "Develop, Manage, Assess, Integrate, Close", "Define, Monitor, Analyze, Implement, Close"], answer: 1 }
+  ],
+  "1.8": [
+    { q: "How many communication channels exist with 5 stakeholders?", options: ["5", "15", "10", "20"], answer: 2 },
+    { q: "Which communication type is best for complex or sensitive topics?", options: ["Push", "Pull", "Interactive", "Formal written"], answer: 2 },
+    { q: "Push communication means:", options: ["Recipient retrieves info from a portal", "Sender delivers info directly to recipient", "Two-way real-time exchange", "Automated system notifications only"], answer: 1 },
+    { q: "A communications management plan should define:", options: ["Project budget allocations", "Who gets what info, when, and how", "Risk responses for communication failures", "Team performance review schedules"], answer: 1 }
+  ],
+  "1.11": [
+    { q: "Which document is used when requirements are well-defined and you primarily need pricing?", options: ["RFI", "RFP", "SOW", "RFQ"], answer: 3 },
+    { q: "Which contract type places the most financial risk on the seller?", options: ["Cost-Reimbursable", "Time & Materials", "Fixed-Price", "Cost-Plus-Fee"], answer: 2 },
+    { q: "What is a Statement of Work (SOW)?", options: ["A vendor proposal document", "A contract negotiation record", "A detailed description of work the vendor must perform", "A budget approval form"], answer: 2 },
+    { q: "RFI is primarily used to:", options: ["Request firm pricing", "Gather market information with no purchase commitment", "Formally select a vendor", "Define contract deliverables"], answer: 1 }
+  ],
+  "2.1": [
+    { q: "Which documents are typically produced in the discovery/concept phase?", options: ["Project charter and WBS", "Business case and feasibility study", "Risk register and issue log", "Communications plan and RACI"], answer: 1 },
+    { q: "What decision does the discovery phase primarily support?", options: ["Sponsor selection", "Go/no-go decision", "Vendor selection", "Risk response planning"], answer: 1 },
+    { q: "When is the project charter created?", options: ["During discovery", "During initiation", "During planning", "During execution"], answer: 1 },
+    { q: "A feasibility study evaluates:", options: ["Team member skills", "Technical, financial, and operational viability", "Risk probability and impact scores", "Communication channel counts"], answer: 1 }
+  ],
+  "2.2": [
+    { q: "What document formally authorizes a project and grants the PM authority?", options: ["Business case", "Project management plan", "Project charter", "Stakeholder register"], answer: 2 },
+    { q: "SMART objectives must be:", options: ["Simple, Manageable, Attainable, Realistic, Timely", "Specific, Measurable, Achievable, Relevant, Time-bound", "Strategic, Measurable, Actionable, Results-driven, Trackable", "Scalable, Measurable, Approved, Realistic, Tested"], answer: 1 },
+    { q: "The project sponsor's primary role is:", options: ["Day-to-day task management", "Risk identification", "Providing funding and executive authorization", "Writing the WBS"], answer: 2 },
+    { q: "When is the project kick-off meeting held?", options: ["Before charter approval", "After charter approval", "During the planning phase", "At project close"], answer: 1 }
+  ],
+  "2.3": [
+    { q: "What makes up the scope baseline?", options: ["WBS only", "WBS + scope statement only", "WBS + WBS dictionary + scope statement", "Scope statement + project charter"], answer: 2 },
+    { q: "Progressive elaboration means:", options: ["Adding scope over time", "Iteratively refining the plan as more info becomes available", "Reducing project complexity", "Adding more stakeholders gradually"], answer: 1 },
+    { q: "A requirements traceability matrix:", options: ["Tracks risk owners", "Links requirements to deliverables and test cases", "Assigns team responsibilities per task", "Tracks change request status"], answer: 1 },
+    { q: "The Project Management Plan (PMP) is:", options: ["Only the project schedule", "A single-page executive summary", "The master document integrating all subsidiary plans", "The same as the project charter"], answer: 2 }
+  ],
+  "2.4": [
+    { q: "What is the best conflict resolution method?", options: ["Avoid", "Force/Direct", "Compromise", "Collaborate/Problem-Solve"], answer: 3 },
+    { q: "Tuckman's team development stages in correct order are:", options: ["Norming, Storming, Forming, Performing", "Forming, Storming, Norming, Performing, Adjourning", "Performing, Forming, Norming, Storming", "Storming, Forming, Norming, Performing, Adjourning"], answer: 1 },
+    { q: "Quality Assurance during execution involves:", options: ["Inspecting final deliverables for defects", "Auditing processes to ensure standards are followed", "Testing software after release", "Reviewing vendor contracts"], answer: 1 },
+    { q: "Change requests arising during execution must:", options: ["Be implemented immediately by the PM", "Be rejected if not in the original plan", "Go through the formal change control process", "Be escalated directly to the sponsor"], answer: 2 }
+  ],
+  "2.5": [
+    { q: "What must happen before a project can formally close?", options: ["All risks are fully resolved", "Formal acceptance by the sponsor/client", "All issues are entered in the issue log", "Team contributions are recognized"], answer: 1 },
+    { q: "The purpose of lessons learned documentation is to:", options: ["Justify the project cost", "Help future projects benefit from past experience", "Assign accountability for failures", "Satisfy auditor requirements only"], answer: 1 },
+    { q: "What does the final project report summarize?", options: ["Future project opportunities", "Project performance vs. scope, schedule, cost, and quality baselines", "A complete list of all team members", "All open risks at closure"], answer: 1 },
+    { q: "Why must project resources be formally released?", options: ["To increase the remaining budget", "To free team members for other assignments and properly close contracts", "To update the risk register", "To produce the lessons learned register"], answer: 1 }
+  ],
+  "3.1": [
+    { q: "Which tool shows task dependencies and is used to find the critical path?", options: ["Gantt chart", "RACI matrix", "Network diagram (PDM)", "Burndown chart"], answer: 2 },
+    { q: "RACI stands for:", options: ["Review, Approve, Consult, Inform", "Responsible, Accountable, Consulted, Informed", "Report, Assess, Coordinate, Implement", "Responsible, Analyze, Consult, Implement"], answer: 1 },
+    { q: "A burndown chart is used in:", options: ["Waterfall schedule management", "Agile sprint tracking", "Risk probability analysis", "Procurement planning"], answer: 1 },
+    { q: "Which tool provides a high-level visual summary of project status?", options: ["Burndown chart", "Risk register", "RACI matrix", "Project dashboard"], answer: 3 }
+  ],
+  "3.2": [
+    { q: "Which PM tool is best suited for Agile/Scrum projects?", options: ["MS Project", "Jira", "SharePoint", "Smartsheet"], answer: 1 },
+    { q: "MS Project is primarily designed for:", options: ["Agile backlog management", "Team chat and collaboration", "Gantt-based Waterfall planning", "Cloud document storage"], answer: 2 },
+    { q: "What should primarily drive project tool selection?", options: ["Personal preference of the PM", "Vendor reputation alone", "Team size, methodology, budget, and integration needs", "The newest tools available"], answer: 2 }
+  ],
+  "3.3": [
+    { q: "On a control chart, the Rule of Seven indicates:", options: ["The process is perfectly in control", "Seven process steps remain", "Seven consecutive points on one side signal the process is out of control", "Seven defects were found this cycle"], answer: 2 },
+    { q: "A Pareto chart is used to:", options: ["Monitor ongoing process variation", "Show correlation between variables", "Identify the most frequent defect causes (80/20 rule)", "Track sprint burndown progress"], answer: 2 },
+    { q: "A fishbone (Ishikawa) diagram is primarily used for:", options: ["Scheduling task dependencies", "Root cause analysis", "Budget variance tracking", "Risk probability charting"], answer: 1 },
+    { q: "A scatter diagram shows:", options: ["Task dependencies over time", "Sprint work remaining", "Correlation between two variables", "Process control limits"], answer: 2 }
+  ],
+  "4.1": [
+    { q: "What does ESG stand for?", options: ["Efficiency, Safety, Governance", "Environmental, Social, Governance", "Ethics, Sustainability, Growth", "Enterprise, Security, Governance"], answer: 1 },
+    { q: "Which is an example of a Social ESG factor?", options: ["Carbon footprint reduction", "Regulatory compliance auditing", "Diversity and inclusion practices", "Financial reporting accuracy"], answer: 2 },
+    { q: "An example of a Governance ESG factor in project management is:", options: ["Reducing energy consumption", "Worker safety programs", "Complying with laws and maintaining ethical practices", "Community outreach campaigns"], answer: 2 }
+  ],
+  "4.2": [
+    { q: "The CIA Triad in information security stands for:", options: ["Control, Integration, Access", "Confidentiality, Integrity, Availability", "Compliance, Identification, Authorization", "Cybersecurity, Infrastructure, Access"], answer: 1 },
+    { q: "The principle of least privilege means:", options: ["Managers always have full system access", "Users receive only the minimum access needed for their role", "Vendors have no access to project systems", "All admins share a single account"], answer: 1 },
+    { q: "When should security requirements be incorporated into a project?", options: ["Only during the testing phase", "At project close only", "From the very beginning of the project", "Only after a security incident occurs"], answer: 2 },
+    { q: "What is the primary purpose of an NDA in project management?", options: ["To define project scope boundaries", "To legally protect confidential information shared with vendors or team members", "To approve vendor invoices", "To document quality standards"], answer: 1 }
+  ],
+  "4.4": [
+    { q: "What are the three cloud service models?", options: ["Public, Private, Hybrid", "IaaS, PaaS, SaaS", "Development, Testing, Production", "Build, Deploy, Monitor"], answer: 1 },
+    { q: "UAT (User Acceptance Testing) means:", options: ["Automated unit testing by developers", "End users test the system to confirm it meets business requirements", "Security testing before go-live", "Performance testing under load"], answer: 1 },
+    { q: "Technical debt refers to:", options: ["Project budget overruns", "The cost of shortcuts taken now that must be addressed as rework later", "Outstanding vendor invoices", "Security vulnerabilities in the codebase"], answer: 1 },
+    { q: "DevOps primarily emphasizes:", options: ["Strict waterfall documentation practices", "Complete separation of development and operations teams", "Collaboration between dev and ops teams with CI/CD automation", "Manual deployment and testing processes"], answer: 2 }
+  ]
+};
+
 const domains = [...new Set(data.map(o => o.domain))];
 const domainNames = {};
 data.forEach(o => { domainNames[o.domain] = o.domainName; });
@@ -840,6 +1005,8 @@ let openCards = new Set();
 let flashState = {};
 let reviewed = new Set();
 data.forEach(o => { flashState[o.id] = { idx: 0, flipped: false }; });
+let quizState = {};
+data.forEach(o => { quizState[o.id] = { idx: 0, selected: null, score: 0, done: false }; });
 
 function updateProgress() {
   const pct = Math.round((reviewed.size / data.length) * 100);
@@ -857,6 +1024,36 @@ function renderTabs() {
     btn.onclick = () => { activeDomain = d; renderTabs(); renderGrid(); };
     cont.appendChild(btn);
   });
+}
+
+function buildQuizHTML(obj) {
+  const qs = quizState[obj.id];
+  const questions = quizData[obj.id] || [];
+  if (!questions.length) return '';
+  if (qs.done) {
+    const pct = Math.round((qs.score / questions.length) * 100);
+    const msg = pct === 100 ? 'Perfect score! 🎉' : pct >= 75 ? 'Great work!' : pct >= 50 ? 'Keep studying!' : 'Review the material and try again.';
+    return `<div class="quiz-result"><div class="quiz-score">${qs.score} / ${questions.length}</div><div class="quiz-score-label">${msg}</div><button class="quiz-retry" onclick="retryQuiz('${obj.id}', event)">Retry Quiz</button></div>`;
+  }
+  const q = questions[qs.idx];
+  const optHTML = q.options.map((opt, i) => {
+    let cls = 'quiz-opt';
+    const dis = qs.selected !== null ? 'disabled' : '';
+    if (qs.selected !== null) {
+      if (i === q.answer) cls += ' correct';
+      else if (i === qs.selected) cls += ' incorrect';
+    }
+    return `<button class="${cls}" ${dis} onclick="selectQuizOpt('${obj.id}', ${i}, event)">${opt}</button>`;
+  }).join('');
+  let feedHTML = '';
+  if (qs.selected !== null) {
+    const ok = qs.selected === q.answer;
+    const last = qs.idx === questions.length - 1;
+    const action = last ? `finishQuiz('${obj.id}', event)` : `nextQuiz('${obj.id}', event)`;
+    const label = last ? 'See Results' : 'Next Question';
+    feedHTML = `<div class="quiz-feedback ${ok ? 'quiz-correct-msg' : 'quiz-wrong-msg'}">${ok ? '✓ Correct!' : '✗ Correct answer: ' + q.options[q.answer]}</div><button class="quiz-next" onclick="${action}">${label}</button>`;
+  }
+  return `<div class="quiz-q">${qs.idx + 1}. ${q.q}</div><div class="quiz-opts">${optHTML}</div>${feedHTML}<div class="quiz-progress">${qs.idx + 1} / ${questions.length}</div>`;
 }
 
 function renderGrid() {
@@ -897,6 +1094,9 @@ function renderGrid() {
         </div>
 
         <div class="tip-box"><div class="tip-text"><strong>💡 Exam tip:</strong> ${obj.tip.replace('Exam tip: ', '')}</div></div>
+
+        <div class="section-label">Practice Quiz</div>
+        <div class="quiz-wrap" id="quiz-${obj.id}">${buildQuizHTML(obj)}</div>
       </div>
     `;
     cont.appendChild(card);
@@ -928,6 +1128,44 @@ window.prevFlash = function(id, e) {
   flashState[id].idx = (flashState[id].idx - 1 + obj.flashcards.length) % obj.flashcards.length;
   flashState[id].flipped = false;
   renderGrid();
+};
+
+window.selectQuizOpt = function(id, i, e) {
+  e.stopPropagation();
+  const qs = quizState[id];
+  if (qs.selected !== null) return;
+  qs.selected = i;
+  const questions = quizData[id] || [];
+  if (i === questions[qs.idx].answer) qs.score++;
+  const obj = data.find(o => o.id === id);
+  const wrap = document.getElementById('quiz-' + id);
+  if (wrap) wrap.innerHTML = buildQuizHTML(obj);
+};
+
+window.nextQuiz = function(id, e) {
+  e.stopPropagation();
+  const qs = quizState[id];
+  qs.idx++;
+  qs.selected = null;
+  const obj = data.find(o => o.id === id);
+  const wrap = document.getElementById('quiz-' + id);
+  if (wrap) wrap.innerHTML = buildQuizHTML(obj);
+};
+
+window.finishQuiz = function(id, e) {
+  e.stopPropagation();
+  quizState[id].done = true;
+  const obj = data.find(o => o.id === id);
+  const wrap = document.getElementById('quiz-' + id);
+  if (wrap) wrap.innerHTML = buildQuizHTML(obj);
+};
+
+window.retryQuiz = function(id, e) {
+  e.stopPropagation();
+  quizState[id] = { idx: 0, selected: null, score: 0, done: false };
+  const obj = data.find(o => o.id === id);
+  const wrap = document.getElementById('quiz-' + id);
+  if (wrap) wrap.innerHTML = buildQuizHTML(obj);
 };
 
 renderTabs();
