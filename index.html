@@ -878,6 +878,395 @@ const data = [
       { q: "What does DevOps emphasize?", a: "Collaboration between development and operations teams, with automation, CI/CD, and continuous improvement." }
     ],
     tip: "Exam tip: Know the 3 cloud service models and what each provides. IaaS = you manage OS+up. PaaS = you manage app+up. SaaS = vendor manages everything."
+  },
+  // ── Domain 5: Missed Topics (generated from CertMaster wrong answers) ──────
+  {
+    id: "M.1", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Requirements, methodologies, PMO authority, OKRs, and task boards.",
+    keys: [
+      "Non-functional requirements describe system quality attributes — usability, compliance, performance, security.",
+      "Paired programming is a practice from Extreme Programming (XP): two developers work together at one workstation.",
+      "PRINCE2 is a process-based project management methodology — structured, stage-controlled, popular in UK/EU.",
+      "XaaS (Anything as a Service) is the umbrella term for all cloud computing service models.",
+      "A PMO with full (directive) authority can direct all projects and override project managers — the highest PMO level.",
+      "OKRs (Objectives and Key Results): drive teams forward to achieve significant results quickly.",
+      "RTM (Requirements Traceability Matrix): links requirements to tests, impact analysis, and related requirements.",
+      "A task board is a visual tracking tool; work item cards are organized in workflow lanes."
+    ],
+    terms: [
+      { t: "XP (Extreme Programming)", d: "Agile method using paired programming, TDD, and continuous integration." },
+      { t: "Non-Functional Requirements", d: "Quality attributes: usability, compliance, performance, security." },
+      { t: "PRINCE2", d: "Process-based, stage-controlled PM methodology; UK/EU popular." },
+      { t: "XaaS", d: "Anything as a Service — umbrella for all cloud service models." },
+      { t: "PMO (Directive)", d: "Full authority; directs all projects; can override project managers." },
+      { t: "OKR", d: "Objectives and Key Results — framework for ambitious team goals." },
+      { t: "RTM / RAM", d: "Requirements Traceability Matrix — links requirements to tests and impact analysis." },
+      { t: "Task Board", d: "Visual tool with lanes for tracking work items through their workflow." }
+    ],
+    flashcards: [
+      { q: "Which Agile methodology uses paired programming?", a: "Extreme Programming (XP) — two developers work together at one workstation to improve code quality." },
+      { q: "What are non-functional requirements?", a: "System quality attributes such as usability, compliance, performance, and security — they describe HOW the system behaves, not WHAT it does." },
+      { q: "What does a full-authority (directive) PMO have the power to do?", a: "Direct all projects in the organization and override project managers — it is the highest level of PMO authority." },
+      { q: "What does a Requirements Traceability Matrix (RTM) link requirements to?", a: "Tests, impact analysis, and other related requirements — ensuring nothing is lost through the project." },
+      { q: "What are OKRs used for?", a: "Objectives and Key Results — to drive teams forward and achieve significant, ambitious results quickly." }
+    ],
+    tip: "Exam tip: Paired programming = XP. Non-functional = quality attributes (usability, compliance). Directive PMO can override PMs. RTM tracks requirements through tests and impact analysis."
+  },
+  {
+    id: "M.2", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Task dependencies (FS, FF, SS, SF), resource optimization, and gap analysis.",
+    keys: [
+      "Finish-to-Start (FS): Activity 2 starts after Activity 1 finishes — the MOST COMMON dependency type.",
+      "Finish-to-Finish (FF): Activity 2 finishes after Activity 1 finishes; start times are irrelevant.",
+      "Start-to-Start (SS): Activity 2 starts after Activity 1 begins.",
+      "Start-to-Finish (SF): Activity 2 finishes only after Activity 1 has started — the RAREST dependency type.",
+      "Resource smoothing: moves tasks to even out resource usage; project timeline does NOT extend.",
+      "Resource leveling: reduces resource variation but DOES allow the project timeline to extend.",
+      "Gap analysis: compares the current state to the desired future state and describes the differences.",
+      "A project needs assessment reduces unknowns and improves on-time performance.",
+      "Total float (slack): how long an activity can be delayed without impacting the project end date; zero on the critical path."
+    ],
+    terms: [
+      { t: "Finish-to-Start (FS)", d: "Successor starts after predecessor finishes. Most common." },
+      { t: "Finish-to-Finish (FF)", d: "Successor finishes after predecessor finishes; start irrelevant." },
+      { t: "Start-to-Start (SS)", d: "Successor starts after predecessor begins." },
+      { t: "Start-to-Finish (SF)", d: "Successor finishes after predecessor starts. Rarest." },
+      { t: "Resource Smoothing", d: "Evens resource usage by shifting tasks; timeline stays fixed." },
+      { t: "Resource Leveling", d: "Reduces resource variation; timeline may extend." },
+      { t: "Gap Analysis", d: "Compares current state to future state; identifies differences to bridge." },
+      { t: "Total Float", d: "Time an activity can delay without impacting the project end date." }
+    ],
+    flashcards: [
+      { q: "Which task dependency is the most common?", a: "Finish-to-Start (FS) — Activity 2 cannot start until Activity 1 finishes." },
+      { q: "Which task dependency is the rarest?", a: "Start-to-Finish (SF) — Activity 2 finishes only after Activity 1 has started." },
+      { q: "What is the key difference between resource smoothing and resource leveling?", a: "Resource smoothing shifts tasks to even resource usage without extending the timeline. Resource leveling reduces variation but CAN extend the timeline." },
+      { q: "What does a gap analysis do?", a: "It compares the current state to the desired future state and describes the differences the project must address." },
+      { q: "What is total float and what does zero float mean?", a: "Total float is how long an activity can be delayed without impacting the end date. Zero float = the task is on the critical path." }
+    ],
+    tip: "Exam tip: FS = most common. SF = rarest. Resource smoothing keeps the deadline; resource leveling can push it. Zero float = critical path."
+  },
+  {
+    id: "M.3", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Vendor evaluation, best-value selection, contract types, and parametric estimating.",
+    keys: [
+      "Capacity evaluation: determines whether the vendor has sufficient resources to complete the work.",
+      "Reference checks: PM contacts other clients of the vendor to verify their performance and reliability.",
+      "Best-value evaluation: considers BOTH cost AND additional performance factors to find the most value.",
+      "Fixed-price contract: agreed set price for fixed scope; financial risk is on the SELLER.",
+      "Cost-plus contract: buyer pays all resource costs + a vendor fee; financial risk is on the BUYER.",
+      "Time and Materials (T&M): hybrid contract; buyer pays labor and materials up to a maximum price.",
+      "Unit price contract: for definable, same-sized bundles of work; also called a measurement contract.",
+      "Parametric estimating: uses historical data and known variables (e.g., cost per hour × hours) to build custom estimates."
+    ],
+    terms: [
+      { t: "Capacity Evaluation", d: "Assesses whether vendor has resources to complete the work." },
+      { t: "Best-Value Evaluation", d: "Selects vendor with most value: cost + performance factors." },
+      { t: "Fixed-Price Contract", d: "Set price for fixed scope; seller bears financial risk." },
+      { t: "Cost-Plus Contract", d: "Buyer pays all costs + vendor fee; buyer bears financial risk." },
+      { t: "Time & Materials (T&M)", d: "Hybrid: pays labor + materials up to a maximum price." },
+      { t: "Unit Price Contract", d: "For equal-sized, definable bundles; a.k.a. measurement contract." },
+      { t: "Parametric Estimating", d: "Historical data + known variables (e.g., $/hr × hrs) = estimate." }
+    ],
+    flashcards: [
+      { q: "In vendor evaluation, what does a capacity evaluation determine?", a: "Whether the vendor has sufficient resources and capacity to complete the work." },
+      { q: "How is best-value evaluation different from lowest-cost selection?", a: "Best-value considers BOTH cost AND additional performance factors to find the most value — not just the cheapest price." },
+      { q: "Which contract type places the most financial risk on the SELLER?", a: "Fixed-price — the seller is locked into a price regardless of actual costs." },
+      { q: "Which contract type places the most financial risk on the BUYER?", a: "Cost-plus — the buyer pays all resource costs plus a vendor fee, regardless of how high costs go." },
+      { q: "What is a unit price contract best used for?", a: "Purchasing definable, same-sized bundles of work (also called a measurement or re-measurement contract)." }
+    ],
+    tip: "Exam tip: Fixed-price = risk on seller. Cost-plus = risk on buyer. T&M is a hybrid. Best-value ≠ cheapest. Capacity evaluation checks if the vendor CAN do the work."
+  },
+  {
+    id: "M.4", domain: "Domain 5", domainName: "Missed Topics",
+    title: "EVM metrics, leading vs. lagging indicators, KPIs, and SMART goals.",
+    keys: [
+      "Cost Variance (CV) = Earned Value (EV) − Actual Cost (AC). Positive = under budget; negative = over budget.",
+      "Schedule Variance (SV) = Earned Value (EV) − Planned Value (PV). Positive = ahead of schedule.",
+      "Leading indicators are PREDICTIVE — signal future performance before the outcome is known.",
+      "Lagging indicators are REFLECTIVE — captured after work is complete; describe actual success.",
+      "KPIs (Key Performance Indicators) are proxy measures that estimate the overall health of a project or system.",
+      "SMART goals: Specific, Measurable, Achievable, Relevant, Time-bound.",
+      "OKRs (Objectives and Key Results): drive teams toward ambitious targets quickly — not just to be realistic."
+    ],
+    terms: [
+      { t: "Cost Variance (CV)", d: "EV − AC. Positive = under budget; negative = over budget." },
+      { t: "Schedule Variance (SV)", d: "EV − PV. Positive = ahead of schedule." },
+      { t: "Leading Indicator", d: "Predictive measure; signals future performance." },
+      { t: "Lagging Indicator", d: "Reflective measure; captured after work completes." },
+      { t: "KPI", d: "Proxy measure estimating overall health of a project or system." },
+      { t: "SMART", d: "Specific, Measurable, Achievable, Relevant, Time-bound." },
+      { t: "OKR", d: "Objectives and Key Results — drives teams to ambitious outcomes." }
+    ],
+    flashcards: [
+      { q: "What is the formula for Cost Variance (CV)?", a: "CV = Earned Value (EV) − Actual Cost (AC). Positive = under budget." },
+      { q: "What is a lagging indicator?", a: "A reflective measure captured AFTER work is complete — it describes the actual success of the project." },
+      { q: "What is a leading indicator?", a: "A predictive measure — if it performs well, the desired outcome is expected to improve." },
+      { q: "How do KPIs differ from lagging indicators?", a: "KPIs are proxy measures that estimate ongoing health in real time. Lagging indicators are final measurements taken after work completes." },
+      { q: "What does SMART stand for?", a: "Specific, Measurable, Achievable, Relevant, Time-bound." }
+    ],
+    tip: "Exam tip: CV = EV − AC. Positive variance = good (under budget/ahead of schedule). Leading = predicts future. Lagging = reflects past. KPI = proxy health measure."
+  },
+  {
+    id: "M.5", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Stakeholder roles (end-user, customer, sponsor), project closure steps, and RACI.",
+    keys: [
+      "End-user: the person who interacts with the final product; may or may not be the same as the customer.",
+      "Customer: the party who receives the project benefits; may not be the end-user.",
+      "Sponsor: accountable for the project; typically a single senior management member who provides authorization.",
+      "Senior management: highest organizational leadership; can influence project success even without direct involvement.",
+      "When all deliverables are approved and validated, the project is APPROVED TO CLOSE — but is NOT yet formally closed.",
+      "The transition plan outlines how deliverables will be handed off to permanent operational owners.",
+      "RACI: Responsible (does work), Accountable (approves; ONE per task), Consulted (SME input), Informed (updates only).",
+      "After stakeholder approval, no new change requests can be accepted."
+    ],
+    terms: [
+      { t: "End-User", d: "Interacts with the final deliverable; may differ from the customer." },
+      { t: "Customer", d: "Receives project benefits; may not be the end-user." },
+      { t: "Sponsor", d: "Accountable for the project; provides executive authorization." },
+      { t: "Responsible (RACI)", d: "Performs the work on the deliverable." },
+      { t: "Accountable (RACI)", d: "Approves all work; only ONE per activity." },
+      { t: "Consulted (RACI)", d: "SME who provides advice and reviews work (two-way comms)." },
+      { t: "Informed (RACI)", d: "Receives updates; does not interact with tasks (one-way comms)." },
+      { t: "Transition Plan", d: "Outlines handoff of deliverables to permanent operational owners." }
+    ],
+    flashcards: [
+      { q: "What is the difference between a customer and an end-user?", a: "The customer receives the project benefits. The end-user interacts with the final product. They are not always the same person." },
+      { q: "In RACI, what is the critical rule for the 'Accountable' role?", a: "There should be only ONE accountable person per activity — to create clear authority." },
+      { q: "What does stakeholder approval of all deliverables mean?", a: "The project is approved to close — but it is not yet formally closed. No new change requests can be accepted." },
+      { q: "What is the purpose of the transition plan?", a: "To outline how completed deliverables will be handed off to permanent owners in ongoing operations." },
+      { q: "What is the role of a 'Consulted' person in RACI?", a: "A subject matter expert (SME) who provides advice, direction, or quality checks — two-way communication." }
+    ],
+    tip: "Exam tip: Customer ≠ end-user. Only ONE accountable per RACI row. Stakeholder approval = approved to close (not formally closed yet). Transition plan = handoff plan."
+  },
+  {
+    id: "M.6", domain: "Domain 5", domainName: "Missed Topics",
+    title: "WBS structure: elements, levels, legs, work packages, and the 8-80 rule.",
+    keys: [
+      "Element: a deliverable box/row in the WBS — typically described in 2–3 words.",
+      "Level: the hierarchical layer number; level 1 = the project itself; numbered sequentially downward.",
+      "Leg: a group of elements that share a common ancestor; lowest elements roll up to the top of the leg.",
+      "Work package: the lowest (terminal) element in a branch — no children; used to estimate cost, time, and resources.",
+      "8-80 rule: a work package should require no fewer than 8 and no more than 80 hours of effort.",
+      "Stop decomposing when: the team can estimate time/cost/resources; the element fits in a reporting period; the 8-80 rule is met.",
+      "A WBS should not have so many details it is overwhelming — break down only to useful levels.",
+      "High-level deliverables = WBS elements. Lowest-level tasks = work packages."
+    ],
+    terms: [
+      { t: "WBS Element", d: "A deliverable (box/row) in the WBS; 2–3 words; not the level." },
+      { t: "WBS Level", d: "Hierarchical layer; level 1 = the project; numbered downward." },
+      { t: "WBS Leg", d: "Group of elements sharing an ancestor; lowest items roll up." },
+      { t: "Work Package", d: "Lowest (terminal) WBS element; estimates cost, time, resources." },
+      { t: "8-80 Rule", d: "Work packages should be 8–80 hours of effort." }
+    ],
+    flashcards: [
+      { q: "What is a work package in a WBS?", a: "The lowest (terminal) element in a WBS branch — it has no children and is used to estimate cost, time, and resources." },
+      { q: "What is the 8-80 rule for WBS decomposition?", a: "A work package should require no fewer than 8 hours and no more than 80 hours of effort." },
+      { q: "What is the difference between a WBS 'element' and a 'level'?", a: "An element is a deliverable (a box in the chart, 2–3 words). A level is the hierarchical layer number where the element sits." },
+      { q: "When should you stop decomposing a WBS element further?", a: "When you can estimate time, cost, and resources; when it fits in a reporting period; or when it meets the 8-80 hour rule." },
+      { q: "What is a WBS 'leg'?", a: "A group of elements that share a common ancestor; the lowest elements in the leg roll up to the highest level of that leg." }
+    ],
+    tip: "Exam tip: Work package = terminal element (lowest). Element = deliverable (2–3 words). Level = layer number. Leg = branch sharing an ancestor. 8-80 = hour range for work packages."
+  },
+  {
+    id: "M.7", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Estimating techniques and Agile charts (burndown, burnup, velocity, throughput).",
+    keys: [
+      "Top-down estimating: estimates the whole project first, then cascades down; less accurate.",
+      "Bottom-up estimating: estimates at the lowest WBS level and aggregates upward; most accurate.",
+      "Three-point estimating: uses optimistic (O), most likely (M), and pessimistic (P) — can combine with any technique.",
+      "Parametric estimating: historical data + known variables (e.g., cost/hr × hrs); creates custom estimates.",
+      "Burndown chart: shows work REMAINING each day — frequently used for daily sprint tracking.",
+      "Burnup chart: shows work COMPLETED each day — starts at zero, ends at total project work.",
+      "Velocity chart: measures STORY POINTS completed per iteration; used for trend analysis.",
+      "Throughput chart: measures ITEMS COMPLETED per iteration; used for trend analysis.",
+      "Product owner (Agile): accountable for creating the most valuable product; identifies what to build.",
+      "Product manager (any framework): strategic, cross-lifecycle role; oversees a product's entire life cycle."
+    ],
+    terms: [
+      { t: "Top-Down Estimating", d: "Estimate whole project first, cascade down; less accurate." },
+      { t: "Bottom-Up Estimating", d: "Estimate lowest-level activities, aggregate up; most accurate." },
+      { t: "Three-Point Estimating", d: "Uses O, M, P scenarios; can combine with other methods." },
+      { t: "Parametric Estimating", d: "Historical data + known variables = custom estimate." },
+      { t: "Burndown Chart", d: "Work REMAINING each day; daily sprint tracking." },
+      { t: "Burnup Chart", d: "Work COMPLETED each day; starts at zero." },
+      { t: "Velocity Chart", d: "Story points completed per iteration; trend analysis." },
+      { t: "Throughput Chart", d: "Items completed per iteration; trend analysis." }
+    ],
+    flashcards: [
+      { q: "Which estimating technique is the most accurate?", a: "Bottom-up estimating — it estimates at the lowest WBS level and aggregates upward." },
+      { q: "What is parametric estimating?", a: "Uses historical data and known variables (e.g., cost per hour × number of hours) to create a custom estimate." },
+      { q: "What does a burndown chart show?", a: "Work REMAINING each day — used for daily sprint tracking, especially near milestones." },
+      { q: "How does a burnup chart differ from a burndown chart?", a: "Burnup shows work COMPLETED (starts at zero, rises to total). Burndown shows work REMAINING (starts high, falls to zero)." },
+      { q: "What is the difference between a velocity chart and a throughput chart?", a: "Velocity = story points per iteration. Throughput = number of items completed per iteration. Both are used for trend analysis." }
+    ],
+    tip: "Exam tip: Bottom-up = most accurate. Parametric = known variables × historical data. Burndown = work left. Burnup = work done. Velocity = story points/sprint. Throughput = items/sprint."
+  },
+  {
+    id: "M.8", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Data classification levels and cloud service models (IaaS, PaaS, SaaS, XaaS).",
+    keys: [
+      "Public data: least sensitive; no restrictions; examples include press releases and job postings.",
+      "Internal data: available to all employees; minimally sensitive; not public-facing.",
+      "Confidential data: sensitive; limited to authorized users on a role or case-by-case basis.",
+      "Restricted data: MOST sensitive; need-to-know basis with strict business justification.",
+      "IaaS (Infrastructure as a Service): basic computing resources — servers, networks, storage.",
+      "PaaS (Platform as a Service): development tools and software environments delivered over the internet.",
+      "SaaS (Software as a Service): complete software stack — infrastructure + environment + product; accessed via browser.",
+      "XaaS (Anything as a Service): umbrella term for all cloud computing service models."
+    ],
+    terms: [
+      { t: "Public Data", d: "Least sensitive; no restrictions; press releases, job postings." },
+      { t: "Internal Data", d: "Company-wide; not public; minimal sensitivity." },
+      { t: "Confidential Data", d: "Role-based or case-by-case access; sensitive." },
+      { t: "Restricted Data", d: "Most sensitive; need-to-know with strict business justification." },
+      { t: "IaaS", d: "Infrastructure as a Service: servers, networks, storage." },
+      { t: "PaaS", d: "Platform as a Service: dev tools and environments." },
+      { t: "SaaS", d: "Software as a Service: full stack; accessed via browser." },
+      { t: "XaaS", d: "Anything as a Service: umbrella for all cloud models." }
+    ],
+    flashcards: [
+      { q: "Which data classification level is the most sensitive?", a: "Restricted data — accessible only on a need-to-know basis with strict business justification." },
+      { q: "What is the difference between confidential and internal data?", a: "Internal is available to all employees (minimal sensitivity). Confidential is limited to authorized users on a role or case-by-case basis." },
+      { q: "What cloud model provides development tools and software environments?", a: "PaaS (Platform as a Service) — delivers development tools and software environments over the internet." },
+      { q: "How is SaaS different from IaaS?", a: "SaaS is a complete software stack (infrastructure + environment + product) accessed via browser — vendor manages everything. IaaS provides only basic infrastructure." },
+      { q: "What does XaaS stand for?", a: "Anything as a Service — the umbrella term for any cloud computing service model (including IaaS, PaaS, and SaaS)." }
+    ],
+    tip: "Exam tip: Data sensitivity: Public < Internal < Confidential < Restricted. Cloud: IaaS = infrastructure, PaaS = platform/dev tools, SaaS = full app, XaaS = all of the above."
+  },
+  {
+    id: "M.9", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Quality and analysis tools: scatter diagram, run chart, five-why, Pareto, and diagrams.",
+    keys: [
+      "Scatter diagram: shows correlation/relationship between two variables — each occurrence is a dot on an x/y grid.",
+      "Run chart (time series plot): line graph showing data over time; x-axis = time/sequence, y-axis = measured values.",
+      "Five-why analysis: root cause technique that asks 'why' repeatedly to move past symptoms to hidden root causes.",
+      "Pareto principle (80/20 rule): 80% of problems come from 20% of root causes — focus on the vital few.",
+      "Fishbone (Ishikawa/cause-and-effect) diagram: maps categories of causes to a problem effect.",
+      "Mind map: visualizes categories of information around a central theme; great for brainstorming.",
+      "Data flow diagram (DFD): shows how information flows through a process; works for technical and non-technical audiences.",
+      "Quadrant diagram: four-quadrant grid with one factor per axis — each quadrant = high-low combination.",
+      "Flowchart (process flow): visualizes a process step by step; compresses complex instructions into a visual."
+    ],
+    terms: [
+      { t: "Scatter Diagram", d: "Shows correlation between two variables using x/y dots." },
+      { t: "Run Chart", d: "Time-series line graph; x = time, y = measurement." },
+      { t: "Five-Why Analysis", d: "Asks 'why' ~5 times to uncover root causes." },
+      { t: "Pareto Principle", d: "80% of problems from 20% of causes; focus on vital few." },
+      { t: "Mind Map", d: "Visual brainstorming tool around a central theme/concept." },
+      { t: "Data Flow Diagram", d: "Shows information flow; suits technical and non-technical audiences." },
+      { t: "Quadrant Diagram", d: "4-quadrant grid; one factor per axis; high-low combinations." },
+      { t: "Flowchart", d: "Step-by-step visual of a process; a.k.a. process flow diagram." }
+    ],
+    flashcards: [
+      { q: "What does a scatter diagram show?", a: "The correlation or relationship between two variables — each paired (x, y) value is plotted as a dot." },
+      { q: "How does a run chart differ from a control chart?", a: "A run chart plots data over time without control limits. A control chart adds upper and lower control limits to detect process instability." },
+      { q: "What is the five-why analysis technique used for?", a: "Root cause analysis — it asks 'why' repeatedly (typically 5 times) to look beyond surface symptoms and find the true root cause." },
+      { q: "What does the Pareto principle state?", a: "80% of problems are caused by 20% of root causes. Fix the vital few causes to resolve the majority of issues." },
+      { q: "Which diagram type best visualizes how data moves through a system for a mixed audience?", a: "A data flow diagram (DFD) — it works well for both technical and non-technical stakeholders." }
+    ],
+    tip: "Exam tip: Scatter = correlation. Run chart = time series. Five-why = root cause. Pareto = 80/20 vital few. DFD = info flow (mixed audience). Flowchart = process steps."
+  },
+  {
+    id: "M.10", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Risk analysis: interconnectivity, detectability, qualitative vs. quantitative, and risk reporting.",
+    keys: [
+      "Interconnectivity: a risk can trigger a ripple effect — one risk can impact many events; nothing exists in isolation.",
+      "Detectability: how quickly a risk would be identified if it occurs. High detectability = clear, early warning signals.",
+      "Qualitative risk analysis: SUBJECTIVE — based on perception and interpretation; quick and easy to apply.",
+      "Quantitative risk analysis: OBJECTIVE — uses verifiable data to assign scores; reliable when source data is accurate.",
+      "Risk register: logs all identified risks with probability, impact, priority, owner, and planned response.",
+      "Contingency plan (risk treatment): includes primary contacts, escalation paths, and communication procedures.",
+      "Risk report: shared throughout the project; highlights notable timely and high-impact risks.",
+      "Risk report also summarizes scope impacts resulting from risks that have been realized."
+    ],
+    terms: [
+      { t: "Interconnectivity", d: "A risk's ability to create ripple effects across multiple events." },
+      { t: "Detectability", d: "How quickly a risk is identified when it occurs." },
+      { t: "Qualitative Analysis", d: "Subjective risk scoring; perception-based; quick to apply." },
+      { t: "Quantitative Analysis", d: "Objective risk scoring; uses verifiable numerical data." },
+      { t: "Risk Register", d: "Logs all risks: probability, impact, owner, response." },
+      { t: "Contingency Plan", d: "Risk response plan: contacts, escalations, communications." },
+      { t: "Risk Report", d: "Shared throughout project; highlights high-impact risks and scope impacts." }
+    ],
+    flashcards: [
+      { q: "What is risk interconnectivity?", a: "The concept that a single risk can trigger a ripple effect, impacting multiple events — nothing exists in isolation." },
+      { q: "What does detectability measure in risk management?", a: "How quickly a risk would be identified if it occurs. High detectability = clear, early warning signals." },
+      { q: "What is the key difference between qualitative and quantitative risk analysis?", a: "Qualitative is subjective (perception-based, quick to apply). Quantitative is objective (data-driven, numerical scores)." },
+      { q: "What does a risk report include?", a: "Notable timely and high-impact risks, a summary of the risk management process, and scope impacts from realized risks." },
+      { q: "What information belongs in a contingency plan?", a: "Primary contacts, whom to inform, escalation paths, and communication procedures for when a risk occurs." }
+    ],
+    tip: "Exam tip: Interconnectivity = ripple effect. Detectability = how fast you'll see it. Qualitative = fast/subjective. Quantitative = data/objective. Risk report ≠ risk register."
+  },
+  {
+    id: "M.11", domain: "Domain 5", domainName: "Missed Topics",
+    title: "Communication types (synchronous, formal, informal), artifacts, and focus group approaches.",
+    keys: [
+      "Synchronous communication: real-time — all participants interact at the same time.",
+      "Formal communication: official, intentional channels that document decisions.",
+      "Informal communication: unofficial exchanges — casual conversations, group chatter, nonverbal cues.",
+      "Written communication: handwritten or typed — letters, email, chat messages, Braille.",
+      "Communication artifacts: tangible outputs of the communications plan — presentations, pictures, documents.",
+      "Channels are the medium used to deliver artifacts — not artifacts themselves.",
+      "Recipients are who receives communications — not the artifacts themselves.",
+      "Dual-moderator focus group: one lead facilitator + one quality-check moderator (tracks topics, ensures coverage).",
+      "Dueling-moderator focus group: both moderators actively engaged, taking opposite views.",
+      "Respondent-moderator focus group: participants serve as moderators — dynamic energy, many new ideas.",
+      "Two-way focus group: one group observes another group's session — adds perspective for complex responses."
+    ],
+    terms: [
+      { t: "Synchronous Communication", d: "Real-time; all parties interact simultaneously." },
+      { t: "Formal Communication", d: "Official, intentional channels that document decisions." },
+      { t: "Informal Communication", d: "Unofficial exchanges; casual, nonverbal." },
+      { t: "Communication Artifact", d: "Tangible output: presentations, documents, pictures." },
+      { t: "Dual-Moderator Focus Group", d: "Lead facilitator + quality-check moderator." },
+      { t: "Dueling-Moderator Focus Group", d: "Two moderators actively debating opposite views." },
+      { t: "Respondent-Moderator Focus Group", d: "Participants act as moderators; generates dynamic ideas." },
+      { t: "Two-Way Focus Group", d: "One group observes another session; adds perspective." }
+    ],
+    flashcards: [
+      { q: "What is synchronous communication?", a: "Real-time communication where all participants interact at the same time." },
+      { q: "What are communication artifacts?", a: "Tangible outputs of the communications plan — presentations, documents, and pictures that address stakeholder needs." },
+      { q: "What is a dual-moderator focus group?", a: "Two moderators: one leads the discussion, the other monitors quality and ensures all topics are covered." },
+      { q: "What makes a dueling-moderator focus group unique?", a: "Both moderators are actively engaged and take OPPOSING VIEWS during facilitation, creating a debate dynamic." },
+      { q: "What is a two-way focus group?", a: "One group observes another focus group's session to gain additional perspective and generate more complex responses." }
+    ],
+    tip: "Exam tip: Dual-moderator = facilitator + quality checker. Dueling = two opposing moderators. Two-way = observer group watches another group. Respondent-moderator = participants run it."
+  },
+  {
+    id: "M.12", domain: "Domain 5", domainName: "Missed Topics",
+    title: "SDLC phases (HLD/LLD), ESG factors, project team roles, and estimating technique types.",
+    keys: [
+      "SDLC analysis phase: architect creates the High-Level Design (HLD) — conceptual; defines non-functional requirements.",
+      "SDLC design phase: architect creates the Low-Level Design (LLD) — technical decisions and detailed specs.",
+      "HLD describes how the solution works and integrates; defines non-negotiable parameters.",
+      "LLD breaks the project into components and defines detailed technical specifications.",
+      "ESG — Environmental (E): impact on nature — landfill, waste generation, disposal methods.",
+      "ESG — Social (S): how the company treats people — employees, community, those affected by its products.",
+      "ESG — Governance (G): how the company operates — policies, transparency, ethics, structure.",
+      "Business analyst: bridges business and IT; understands priorities, translates for developers.",
+      "QA specialist: ensures code quality; works with dev team to prevent errors escaping to production.",
+      "Developer: creates the final product; specialized expertise (e.g., software developers write code).",
+      "Architect: umbrella role — enterprise, software, solution architects; designs the solution.",
+      "Business case current state: describes what is happening NOW — appears in problem statement and analysis sections."
+    ],
+    terms: [
+      { t: "HLD (High-Level Design)", d: "Conceptual solution design; non-functional requirements; analysis phase." },
+      { t: "LLD (Low-Level Design)", d: "Detailed technical specs; design phase; architect + SMEs." },
+      { t: "ESG — Environmental", d: "Impact on nature: landfill, waste generation, disposal." },
+      { t: "ESG — Social", d: "Treatment of people: employees, community, product impact." },
+      { t: "ESG — Governance", d: "How company operates: policies, transparency, ethics." },
+      { t: "Business Analyst", d: "Bridges business and IT; translates requirements for dev teams." },
+      { t: "QA Specialist", d: "Ensures code quality; works with dev team to prevent defects." },
+      { t: "Current State (Biz Case)", d: "Describes what is happening now; in problem statement section." }
+    ],
+    flashcards: [
+      { q: "In which SDLC phase is the High-Level Design (HLD) created?", a: "The analysis phase — the HLD is a conceptual design describing how the solution will work and integrate." },
+      { q: "What is the difference between HLD and LLD?", a: "HLD = conceptual design created in the analysis phase. LLD = detailed technical decisions and specs created in the design phase." },
+      { q: "Which ESG factor covers an organization's waste disposal and environmental impact?", a: "Environmental (E) — it covers how the organization impacts the natural world, including landfill use, waste generation, and disposal methods." },
+      { q: "What is the primary role of a business analyst on a project team?", a: "Bridging business and IT — understanding business priorities and the software environment to translate between stakeholders and developers." },
+      { q: "In a business case, what does the 'current state' describe?", a: "What is happening right now — it appears in the problem statement and analysis sections of the business case." }
+    ],
+    tip: "Exam tip: HLD = analysis phase (conceptual). LLD = design phase (technical). ESG: E = nature/waste, S = people, G = policies. BA = business-IT bridge. Current state = problem statement."
   }
 ];
 
@@ -993,6 +1382,91 @@ const quizData = {
     { q: "UAT (User Acceptance Testing) means:", options: ["Automated unit testing by developers", "End users test the system to confirm it meets business requirements", "Security testing before go-live", "Performance testing under load"], answer: 1 },
     { q: "Technical debt refers to:", options: ["Project budget overruns", "The cost of shortcuts taken now that must be addressed as rework later", "Outstanding vendor invoices", "Security vulnerabilities in the codebase"], answer: 1 },
     { q: "DevOps primarily emphasizes:", options: ["Strict waterfall documentation practices", "Complete separation of development and operations teams", "Collaboration between dev and ops teams with CI/CD automation", "Manual deployment and testing processes"], answer: 2 }
+  ],
+  // ── Domain 5: Missed Topics quiz data ────────────────────────────────────
+  "M.1": [
+    { q: "Which Agile methodology uses paired programming?", options: ["Scrum", "Kanban", "SAFe (Scaled Agile)", "Extreme Programming (XP)"], answer: 3 },
+    { q: "Which of the following is a non-functional requirement?", options: ["The system shall allow users to log in", "The system shall handle 1,000 concurrent requests per second", "The system shall generate a monthly invoice", "The system shall store customer order history"], answer: 1 },
+    { q: "What level of authority does a PMO have when it can direct all projects and override project managers?", options: ["Supportive", "Controlling", "Directive (full authority)", "Advisory"], answer: 2 },
+    { q: "What does a Requirements Traceability Matrix (RTM/RAM) link requirements to?", options: ["Team members and budget allocations", "Tests, impact analysis, and related requirements", "Risks and their owners", "Change requests and their approval status"], answer: 1 },
+    { q: "OKRs (Objectives and Key Results) are primarily used to:", options: ["Document project lessons learned", "Track vendor delivery milestones", "Drive teams forward to achieve ambitious results quickly", "Replace the project management plan"], answer: 2 }
+  ],
+  "M.2": [
+    { q: "Which task dependency type is the MOST common?", options: ["Start-to-Start (SS)", "Start-to-Finish (SF)", "Finish-to-Finish (FF)", "Finish-to-Start (FS)"], answer: 3 },
+    { q: "Which task dependency type is the RAREST?", options: ["Finish-to-Start (FS)", "Finish-to-Finish (FF)", "Start-to-Finish (SF)", "Start-to-Start (SS)"], answer: 2 },
+    { q: "What is the key difference between resource smoothing and resource leveling?", options: ["Smoothing uses more resources; leveling uses fewer", "Smoothing can extend the timeline; leveling cannot", "Smoothing keeps the timeline fixed; leveling can extend it", "They are identical optimization techniques"], answer: 2 },
+    { q: "In a Finish-to-Finish (FF) dependency, which statement is correct?", options: ["Activity 2 starts when Activity 1 starts", "Activity 2 can only start after Activity 1 finishes", "Activity 2 finishes after Activity 1 finishes; start times are irrelevant", "Activity 2 finishes only after Activity 1 starts"], answer: 2 },
+    { q: "A gap analysis is primarily used to:", options: ["Identify the critical path in the project schedule", "Compare the current state to the future state and describe differences", "Prioritize risks by probability and impact", "Measure earned value against planned value"], answer: 1 }
+  ],
+  "M.3": [
+    { q: "During vendor evaluation, what does a capacity evaluation determine?", options: ["Whether the vendor's pricing is competitive", "Whether the vendor has sufficient resources to complete the work", "Whether the vendor meets regulatory compliance standards", "Whether the vendor has prior experience in the industry"], answer: 1 },
+    { q: "A best-value evaluation differs from a lowest-cost selection because it:", options: ["Selects automatically based on price alone", "Only considers the vendor's brand reputation", "Considers cost AND additional performance factors for overall value", "Requires a formal RFI before any evaluation"], answer: 2 },
+    { q: "Which contract type places the most financial risk on the SELLER?", options: ["Cost-Plus-Fixed-Fee", "Time and Materials", "Fixed-Price", "Cost-Reimbursable"], answer: 2 },
+    { q: "A unit price contract is best used when:", options: ["Project requirements are completely unknown at the start", "You are purchasing definable, equal-sized bundles of work", "You need maximum flexibility in scope and resources", "The project involves highly complex, one-of-a-kind deliverables"], answer: 1 },
+    { q: "Parametric estimating differs from bottom-up estimating because it:", options: ["Estimates at the lowest WBS level and aggregates up", "Uses team gut instincts and expert judgment only", "Uses historical data and known variables to create a custom estimate", "Always produces the most optimistic estimate"], answer: 2 }
+  ],
+  "M.4": [
+    { q: "What is the formula for Cost Variance (CV)?", options: ["Actual Cost − Planned Value", "Earned Value − Planned Value", "Earned Value − Actual Cost", "Planned Value − Actual Cost"], answer: 2 },
+    { q: "A lagging indicator is best described as:", options: ["A predictive measure of future project performance", "A real-time dashboard metric updated daily", "A measure taken AFTER work is complete that reflects actual results", "A benchmark set during project initiation"], answer: 2 },
+    { q: "Which type of indicator signals that desired outcomes are LIKELY TO IMPROVE?", options: ["Lagging indicator", "Baseline variance metric", "Leading indicator", "Residual risk score"], answer: 2 },
+    { q: "Which acronym correctly expands SMART goals?", options: ["Simple, Manageable, Attainable, Realistic, Timely", "Specific, Measurable, Achievable, Relevant, Time-bound", "Strategic, Measurable, Actionable, Results-driven, Trackable", "Scalable, Measurable, Approved, Realistic, Tested"], answer: 1 },
+    { q: "How do KPIs differ from lagging indicators?", options: ["KPIs are only used at project close; lagging indicators are used throughout", "KPIs are proxy measures of ongoing health; lagging indicators are final post-completion measures", "KPIs measure cost variance; lagging indicators measure schedule variance", "They are the same metric with different names"], answer: 1 }
+  ],
+  "M.5": [
+    { q: "A customer in project management is best defined as:", options: ["The person who interacts with the final product daily", "The party who receives the benefits produced by the project", "The project sponsor who provides executive funding", "The end-user who operates the deliverable"], answer: 1 },
+    { q: "In RACI, how many 'Accountable' people should be assigned per activity?", options: ["As many as needed to ensure coverage", "Two — one technical and one managerial", "Exactly one — to create clear authority", "None — accountability is always shared"], answer: 2 },
+    { q: "When stakeholders approve all deliverables, what is the IMMEDIATE next step?", options: ["The project is immediately and formally closed", "The project is approved to close but is NOT yet formally closed", "All outstanding change requests are automatically approved", "The project re-enters the execution phase for final polish"], answer: 1 },
+    { q: "The 'Consulted' role in RACI is best described as:", options: ["An executive who only receives one-way status updates", "A subject matter expert who provides advice and reviews work (two-way)", "The person primarily responsible for completing the task", "The individual with final approval authority over all work"], answer: 1 },
+    { q: "What is the purpose of a transition plan in project closure?", options: ["To document lessons learned from the project", "To outline how completed deliverables are handed off to permanent operational owners", "To close out vendor contracts and purchase orders", "To reassign team members to new projects"], answer: 1 }
+  ],
+  "M.6": [
+    { q: "In a WBS, what is a 'work package'?", options: ["The top-level project element (level 1)", "A group of elements sharing a common ancestor", "The lowest (terminal) element in a branch used to estimate cost, time, and resources", "The hierarchical layer number assigned to an element"], answer: 2 },
+    { q: "The 8-80 rule in WBS decomposition states that a work package should:", options: ["Have between 8 and 80 sub-elements", "Be assigned to 8 to 80 team members", "Require no fewer than 8 and no more than 80 hours of effort", "Span between 8 and 80 calendar days on the schedule"], answer: 2 },
+    { q: "In a WBS, an 'element' is best described as:", options: ["The hierarchical layer number of a node", "A group of related tasks sharing a common ancestor", "A deliverable; typically described in 2–3 words", "The lowest-level task used for time and cost estimating"], answer: 2 },
+    { q: "A WBS 'leg' refers to:", options: ["The lowest-level work package in the structure", "The layer number assigned to an element", "A group of elements that share a common ancestor", "The project charter reference number"], answer: 2 },
+    { q: "When should you STOP decomposing a WBS element?", options: ["When you reach exactly five levels of hierarchy", "When the element has at least three sub-elements", "When you can estimate time, cost, and resources, or it fits in a reporting period", "When the sponsor approves the WBS structure"], answer: 2 }
+  ],
+  "M.7": [
+    { q: "Which estimating technique is generally the MOST accurate?", options: ["Top-down estimating", "Parametric estimating", "Three-point estimating", "Bottom-up estimating"], answer: 3 },
+    { q: "Parametric estimating uses:", options: ["Team member gut instincts and expert opinions only", "Historical data and known variables (e.g., cost/hr × hours) to build a custom estimate", "The WBS to estimate at the work package level only", "Optimistic, pessimistic, and most-likely scenario inputs"], answer: 1 },
+    { q: "A burndown chart measures:", options: ["Total work COMPLETED each day", "Story points completed per iteration", "Work REMAINING each day during a sprint", "Number of items completed per iteration"], answer: 2 },
+    { q: "How does a burnup chart differ from a burndown chart?", options: ["Burnup shows team capacity; burndown shows task count", "Burnup shows velocity; burndown shows throughput", "Burnup tracks work COMPLETED (starts at zero); burndown tracks work REMAINING (starts high)", "They show the same data presented in reverse order"], answer: 2 },
+    { q: "What is the product owner's primary accountability in Agile?", options: ["Facilitating daily standups and sprint retrospectives", "Managing the project timeline and delivery schedule", "Maximizing the value of the product being created", "Reporting project status to the executive sponsor"], answer: 2 }
+  ],
+  "M.8": [
+    { q: "Which data classification level has NO access restrictions and is publicly available?", options: ["Internal", "Confidential", "Public", "Restricted"], answer: 2 },
+    { q: "Restricted data is best described as:", options: ["Available to all employees within the company", "Sensitive but accessible to anyone with the proper role", "The most sensitive data, accessible only on a strict need-to-know basis", "Publicly available with no access controls"], answer: 2 },
+    { q: "Which cloud service model provides development tools and software environments?", options: ["IaaS", "XaaS", "SaaS", "PaaS"], answer: 3 },
+    { q: "SaaS (Software as a Service) is best described as:", options: ["Basic computing infrastructure like servers and storage", "Development environments and tooling delivered over the internet", "A complete software stack accessed through a browser where the vendor manages everything", "A general term for any type of cloud service model"], answer: 2 },
+    { q: "What does XaaS stand for?", options: ["Extended as a Service", "Exchange as a Service", "Anything as a Service", "Enterprise as a Service"], answer: 2 }
+  ],
+  "M.9": [
+    { q: "What does a scatter diagram show?", options: ["A step-by-step process flow", "The relationship or correlation between two variables", "Data points plotted over a time sequence", "Defect causes ranked by frequency from highest to lowest"], answer: 1 },
+    { q: "A run chart is best described as:", options: ["A four-quadrant grid comparing two project factors", "A time-series line graph showing data over time or sequence", "A root cause diagram mapping categories of causes to an effect", "A chart counting defect frequency by category"], answer: 1 },
+    { q: "The five-why analysis technique is primarily used for:", options: ["Tracking sprint velocity across multiple iterations", "Prioritizing defect causes using the 80/20 rule", "Root cause analysis — asking 'why' repeatedly to uncover hidden causes", "Mapping how information flows through a system or process"], answer: 2 },
+    { q: "According to the Pareto principle, approximately what portion of problems come from a small number of root causes?", options: ["50% of problems from 50% of causes", "90% of problems from 10% of causes", "80% of problems from 20% of causes", "70% of problems from 30% of causes"], answer: 2 },
+    { q: "Which type of diagram would you use to visualize information flow for an audience with mixed technical backgrounds?", options: ["Quadrant diagram", "Scatter diagram", "Data flow diagram (DFD)", "Burndown chart"], answer: 2 }
+  ],
+  "M.10": [
+    { q: "Risk interconnectivity in project management means:", options: ["All risks share the same probability and impact score", "Every risk can create a ripple effect that impacts multiple other events", "High-priority risks automatically escalate to the sponsor", "Risks must always be listed in a specific rank order"], answer: 1 },
+    { q: "High detectability in risk management indicates:", options: ["The risk has a very high probability of occurring", "The risk will be very difficult to spot when it occurs", "The risk provides clear, early warning signals when it occurs or is about to occur", "The risk has already been fully mitigated"], answer: 2 },
+    { q: "Qualitative risk analysis differs from quantitative risk analysis because it:", options: ["Uses numerical data to assign fully objective risk scores", "Requires specialized statistical software to complete", "Is subjective and perception-based; quick and easy to apply", "Always calculates EMV for every identified risk"], answer: 2 },
+    { q: "What does a risk report share with stakeholders throughout the project?", options: ["A complete roster of all project team members and their assignments", "Only risks that have already occurred and been fully resolved", "Notable timely and high-impact risks, plus scope impacts from realized risks", "The full risk register including all probability scores"], answer: 2 },
+    { q: "A contingency plan created during risk treatment should include:", options: ["A list of all risks rejected by the CCB", "Budget reserves allocated per risk owner", "Primary contacts, whom to inform, and escalation paths", "The complete risk register exported as a PDF"], answer: 2 }
+  ],
+  "M.11": [
+    { q: "Synchronous communication is best defined as:", options: ["Written messages exchanged asynchronously over email", "Pre-recorded video content distributed to stakeholders", "Real-time interaction where all parties communicate simultaneously", "Documents stored on a shared portal for on-demand retrieval"], answer: 2 },
+    { q: "Which of the following is a communication ARTIFACT?", options: ["The stakeholder email distribution list", "A project status presentation deck", "The Microsoft Teams channel used to deliver messages", "The list of recipients defined in the communications plan"], answer: 1 },
+    { q: "In a dual-moderator focus group, what is the SECOND moderator's role?", options: ["To take the opposing view from the lead moderator", "To participate as a regular respondent", "To monitor quality and ensure all planned topics are covered", "To transcribe and record all responses verbatim"], answer: 2 },
+    { q: "What makes a dueling-moderator focus group unique?", options: ["Participants take turns moderating the discussion", "One group silently observes another group's session", "Both moderators are actively engaged and take OPPOSING VIEWS", "There is only one moderator and all others are respondents"], answer: 2 },
+    { q: "What is the defining feature of a two-way focus group?", options: ["Two separate groups answer the same survey independently", "One group observes another focus group's session to gain additional perspective", "Both groups debate each other simultaneously", "Participants receive written prompts instead of verbal facilitation"], answer: 1 }
+  ],
+  "M.12": [
+    { q: "In the SDLC, the High-Level Design (HLD) is created during which phase?", options: ["Design phase", "Testing phase", "Analysis phase", "Implementation phase"], answer: 2 },
+    { q: "How does the HLD differ from the LLD?", options: ["HLD is created by developers; LLD is created by architects", "HLD is detailed and technical; LLD is conceptual and high-level", "HLD is conceptual (analysis phase); LLD is detailed technical specs (design phase)", "HLD is produced in design phase; LLD is produced in analysis phase"], answer: 2 },
+    { q: "Which ESG factor covers a company's landfill consumption and waste disposal practices?", options: ["Social (S)", "Governance (G)", "Environmental (E)", "Compliance (C)"], answer: 2 },
+    { q: "What is the primary role of a business analyst on a project team?", options: ["Writing the technical code for the final product", "Designing the system architecture and integration strategy", "Bridging business requirements and IT capabilities", "Ensuring code quality through automated testing"], answer: 2 },
+    { q: "In a business case, the 'current state' section describes:", options: ["The desired future outcomes and success metrics", "The estimated budget for the proposed project", "What is happening RIGHT NOW — the existing problem or situation", "The recommended solution for the identified problem"], answer: 2 }
   ]
 };
 
